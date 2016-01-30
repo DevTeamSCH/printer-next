@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<ul>
+{% for user in users %}
+    {% if user.is_active == True %}
+    <li>{{ user.name }}
+        <ul>
+            {% for printer in user.printers %}
+            {% if printer.status == True %}
+                <li>{{ printer.name }}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+{% endblock %}
