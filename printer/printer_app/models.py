@@ -18,8 +18,13 @@ class User(models.Model):
 
 
 class Printer(models.Model):
+    TYPE_CHOICES = (
+            ("BW", "Fekete-fehér"),
+            ("CL", "Színes")
+    );
+
     owner = models.ForeignKey(User, related_name='owned_printers')
     name = models.CharField(max_length=255)
-    type = models.CharField(max_length=255)
+    type = models.CharField(max_length=2, choices=TYPE_CHOICES)
     status = models.BooleanField(default=False)
     comment = models.CharField(max_length=255, default="")
