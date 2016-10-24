@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'printer_app',
+    'authsch'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -101,6 +102,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_SCH = {
+            'CLIENT_ID': '68289284849992503266',
+            'SECRET_KEY': '7ilvVyLrrTvREfI2LLYjZsQWQ2ALr6bndCYz2kgi5Sz9x9z9JOij7y6Nq6YX1zAU3ZJt0qS49I3vGruQ',
+            'SCOPES': [ 
+                        'basic',
+                        'displayName',
+                        'mail'
+                        ],
+}
+
+AUTH_USER_MODEL = "printer_app.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/

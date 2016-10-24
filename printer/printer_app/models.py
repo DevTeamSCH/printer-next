@@ -1,9 +1,11 @@
 from django.db import models
+from authsch.models import AbstractAuthSchBase
 
 
-class User(models.Model):
+class User(AbstractAuthSchBase):
     appkey = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255, unique=True)
+    email = models.CharField(max_length=255, unique=True)
     room = models.CharField(max_length=255)
 
     # Kilistáza a felhasználó összes nyomtatóját
@@ -21,7 +23,7 @@ class Printer(models.Model):
     TYPE_CHOICES = (
             ("BW", "Fekete-fehér"),
             ("CL", "Színes")
-    );
+    )
 
     owner = models.ForeignKey(User, related_name='owned_printers')
     name = models.CharField(max_length=255)

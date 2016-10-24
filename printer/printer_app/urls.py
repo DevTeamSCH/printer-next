@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'client', views.ClientView.as_view(), name='client'),
     url(r'FAQ', views.FAQView.as_view(), name='FAQ'),
     url(r'profile', views.ProfileView.as_view(), name='profile'),
+    url(r'login', views.LoginCallbackView.as_view(), name='login'),
 ]

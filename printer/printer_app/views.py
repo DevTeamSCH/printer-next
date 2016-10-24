@@ -1,7 +1,7 @@
 # from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.views.generic.edit import CreateView
-
+from authsch.views import CallbackView
 from printer_app import models
 
 
@@ -26,6 +26,7 @@ class FAQView(generic.TemplateView):
 class ProfileView(generic.TemplateView):
     template_name = "printer_app/profile.html"
 
+
 # @login_required
 class NewPrinterView(CreateView):
     model = models.Printer
@@ -34,5 +35,15 @@ class NewPrinterView(CreateView):
     success_url = '/index'
 
     def form_valid(self, form):
-        form.instance.owner = models.User.objects.get(id=1);
-        return super(NewPrinterView, self).form_valid(form);
+        form.instance.owner = models.User.objects.get(id=1)
+        return super(NewPrinterView, self).form_valid(form)
+
+
+class LoginCallbackView(CallbackView):
+    success_url = '/index'
+    error_url = '/index'
+
+    def authentication_successful(self, profile, user):
+        user.name = profile['basic']
+        user.email = profile['mail']
+        user.room = ""
