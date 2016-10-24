@@ -14,7 +14,7 @@
      <script src="{% static 'jquery/jquery-2.2.0.min.js' %}" type="text/javascript"></script>
      <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
 
-    <title>Pritner.SCH</title>
+    <title>Printer.SCH</title>
 </head>
 <body>
     <div class="uk-container uk-container-center">
@@ -54,7 +54,8 @@
                             <i class="uk-icon-sign-out"> Kijelentkezés</button>
                         </div>
                         {% else %}
-                        <button class="uk-button uk-button-danger" onClick="window.location.href= "{% authsch_login_url %}" ">
+                        {{ user }}
+                        <button class="uk-button uk-button-danger" onClick="window.location.href= &#39; {% authsch_login_url %} &#39; ">
                             <i class="uk-icon-sign-in"></i> Bejelentkezés</button>
                         {% endif %}
                     </div>

@@ -1,6 +1,7 @@
 # from django.contrib.auth.decorators import login_required
 from django.views import generic
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
+from django.shortcuts import redirect
 from authsch.views import CallbackView
 from printer_app import models
 
@@ -34,16 +35,29 @@ class NewPrinterView(CreateView):
     template_name_suffix = '_create'
     success_url = '/index'
 
+    def get(self, request, *args, **kwargs):
+        if (request.user.room == ""):
+            return redirect("/getroom")
+        else:
+            return super(NewPrinterView, self).get(request, *args, **kwargs)
+
     def form_valid(self, form):
         form.instance.owner = models.User.objects.get(id=1)
         return super(NewPrinterView, self).form_valid(form)
 
 
+class GetRoomView(UpdateView):
+    model = models.User
+    fields = ['room']
+    template_name_suffix = "_room_update"
+    success_url = "/newprinter"
+
+
 class LoginCallbackView(CallbackView):
     success_url = '/index'
-    error_url = '/index'
+    error_url = '/loginerror'
 
     def authentication_successful(self, profile, user):
-        user.name = profile['basic']
+        user.name = profile['displayName']
         user.email = profile['mail']
         user.room = ""
