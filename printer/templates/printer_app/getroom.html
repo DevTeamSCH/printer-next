@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <p>Nyomtató hozzáadásához meg kell adnod a szobaszámod.</p>
+    <form action="" method="post">
+            {% csrf_token %}
+            <label for="#roominput" value="Szobaszám" />
+            <input type="text" id="roominput" name="roomnumber" />
+            <input type="submit" value="Mentés" />
+    </form>
+{% endblock %}
