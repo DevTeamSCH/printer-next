@@ -4,6 +4,9 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.shortcuts import redirect
 from authsch.views import CallbackView
 from printer_app import models
+from django.conf import settings
+import os
+import binascii
 
 
 class IndexView(generic.TemplateView):
@@ -12,6 +15,13 @@ class IndexView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['users'] = models.User.objects.all()
+        state = binascii.hexlify(os.urandom(5)).decode()
+        self.request.session['authsch_state'] = state
+        context['url'] =  'https://auth.sch.bme.hu/site/login?response_type=code&client_id={client_code}&state={state}&scope={scopes}'.format(
+            client_code=settings.AUTH_SCH['CLIENT_ID'],
+            state=state,
+            scopes='+'.join(settings.AUTH_SCH['SCOPES'])
+        )
         return context
 
 
@@ -61,3 +71,4 @@ class LoginCallbackView(CallbackView):
         user.name = profile['displayName']
         user.email = profile['mail']
         user.room = ""
+        user.save()
