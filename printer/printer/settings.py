@@ -103,13 +103,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_SCH = {
-            'CLIENT_ID': '68289284849992503266',
-            'SECRET_KEY': '7ilvVyLrrTvREfI2LLYjZsQWQ2ALr6bndCYz2kgi5Sz9x9z9JOij7y6Nq6YX1zAU3ZJt0qS49I3vGruQ',
-            'SCOPES': [ 
-                        'basic',
-                        'displayName',
-                        'mail'
-                        ],
+    'CLIENT_ID': '68289284849992503266',
+    'SECRET_KEY': '7ilvVyLrrTvREfI2LLYjZsQWQ2ALr6bndCYz2kgi5Sz9x9z9JOij7y6Nq6YX1zAU3ZJt0qS49I3vGruQ',
+    'SCOPES': [
+        'basic',
+        'displayName',
+        'mail'
+    ],
 }
 
 AUTH_USER_MODEL = "printer_app.User"
@@ -133,6 +133,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "node_modules")
 )
 
 STATIC_URL = '/static/'
