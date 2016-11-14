@@ -23,7 +23,11 @@ class Printer(models.Model):
         ("CL", "Color")
     )
 
-    owner = models.ForeignKey(User, related_name='owned_printers')
+    owner = models.ForeignKey(
+        User,
+        related_name='owned_printers',
+        on_delete=models.CASCADE
+    )
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=2, choices=TYPE_CHOICES)
     status = models.BooleanField(default=False)
