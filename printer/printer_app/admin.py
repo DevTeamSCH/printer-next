@@ -1,4 +1,6 @@
 from django.contrib import admin
+from . import models
 
 # Register your models here.
-# TODO: Ez lehet nem kell
+admin.register(models.Printer)
+admin.register(models.User)
