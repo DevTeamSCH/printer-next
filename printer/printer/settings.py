@@ -110,6 +110,8 @@ AUTH_SCH = {
                         'displayName',
                         'mail'
                         ],
+            'INTERNAL_ID_FIELD_NAME': 'auth_sch_internal_id',
+            'REFRESH_TOKEN_FIELD_NAME': 'refresh_token'
 }
 
 AUTH_USER_MODEL = "printer_app.User"
