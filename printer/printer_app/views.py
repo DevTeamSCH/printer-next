@@ -1,9 +1,15 @@
 # from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.base import RedirectView
 from django.shortcuts import redirect
 from authsch.views import CallbackView
 from printer_app import models
+from rest_framework.authtoken.models import Token
+from authsch.templatetags.authsch_tags import authsch_login_url
+from rest_framework import viewsets
+from rest_framework.response import Response
+from printer_app.serializers import UserPrinterSerializer
 
 
 class IndexView(generic.TemplateView):
@@ -26,6 +32,9 @@ class FAQView(generic.TemplateView):
 class ProfileView(generic.TemplateView):
     template_name = "printer_app/profile.html"
 
+    def token(self):
+        return Token.objects.get_or_create(user=self.request.user)
+
 
 class NewPrinterView(CreateView):
     model = models.Printer
@@ -35,9 +44,9 @@ class NewPrinterView(CreateView):
 
     def get(self, request, *args, **kwargs):
         if (~request.user.is_authenticated()):
-            return redirect("/signin")  # TODO: oldal ami atiranyit az autsch bejelentkezesre
+            return redirect("loginRedirect")
         if (request.user.room == ""):
-            return redirect("/getroom")
+            return redirect("getroom")
         else:
             return super(NewPrinterView, self).get(request, *args, **kwargs)
 
@@ -65,3 +74,24 @@ class LoginCallbackView(CallbackView):
 
     def authentication_failed(self, exception):
         print(exception)
+
+
+class GenerateTokenView(RedirectView):
+    url = 'profile'
+
+    def get_redirect_url(self, *args, **kwargs):
+        Token.objects.create(self.request.user)
+        return super(GenerateTokenView, self).get_redirect_url(*args, **kwargs)
+
+
+class LoginRedirectView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        self.url = authsch_login_url({'request': self.request})
+        return super(LoginRedirectView, self).get_redirect_url(*args, **kwargs)
+
+
+class UserPrinterViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = request.user.printers
+        serializer = UserPrinterSerializer(queryset, many=True)
+        return Response(serializer.data)

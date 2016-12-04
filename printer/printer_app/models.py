@@ -7,6 +7,7 @@ class User(AbstractAuthSchBase):
     name = models.CharField(max_length=255, unique=True)
     email = models.CharField(max_length=255, unique=True)
     room = models.CharField(max_length=255)
+    status = models.BooleanField(default=True)
 
     @property
     def printers(self):
