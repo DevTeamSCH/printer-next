@@ -12,10 +12,8 @@ urlpatterns = [
     url(r'^client', views.ClientView.as_view(), name='client'),
     url(r'^FAQ', views.FAQView.as_view(), name='FAQ'),
     url(r'^profile', views.ProfileView.as_view(), name='profile'),
-    url(r'^login$', views.LoginCallbackView.as_view(), name='login'),
     url(r'^getroom', views.GetRoomView.as_view(), name='getroom'),
     url(r'^generateToken', views.GenerateTokenView.as_view(), name='generateToken'),
-    url(r'^loginRedirect', views.LoginRedirectView.as_view(), name='loginRedirect'),
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
