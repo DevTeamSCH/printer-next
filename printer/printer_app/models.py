@@ -1,20 +1,28 @@
 from django.db import models
-from authsch.models import AbstractAuthSchBase
+from django.contrib.auth.base_user import AbstractBaseUser
 
 
-class User(AbstractAuthSchBase):
-    appkey = models.CharField(max_length=255, unique=True)
+class User(AbstractBaseUser):
     name = models.CharField(max_length=255, unique=True)
     email = models.CharField(max_length=255, unique=True)
-    room = models.CharField(max_length=255)
+    room = models.CharField(max_length=255, default="")
     status = models.BooleanField(default=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['name']
+
+    def get_full_name(self):
+        return self.name
+
+    def get_short_name(self):
+        return self.name
 
     @property
     def printers(self):
         return self.owned_printers.all()
 
     @property
-    def is_active(self):
+    def has_active_printers(self):
         return any(printer.status for printer in self.printers)
 
 
