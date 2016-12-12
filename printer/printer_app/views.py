@@ -59,12 +59,16 @@ class GetRoomView(UpdateView):
     template_name_suffix = "_room_update"
     success_url = "/newprinter"
 
+    def get_object(self):
+        return self.request.user
+
 
 class GenerateTokenView(RedirectView):
     url = 'profile'
 
     def get_redirect_url(self, *args, **kwargs):
-        Token.objects.create(self.request.user)
+        Token.objects.filter(user=self.request.user).delete()
+        Token.objects.create(user=self.request.user)
         return super(GenerateTokenView, self).get_redirect_url(*args, **kwargs)
 
 
