@@ -1,9 +1,14 @@
 # from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.base import RedirectView
 from django.shortcuts import redirect
-from authsch.views import CallbackView
 from printer_app import models
+from rest_framework.authtoken.models import Token
+from rest_framework import viewsets
+from rest_framework.response import Response
+from printer_app.serializers import UserPrinterSerializer
+from django.contrib.auth import login
 
 
 class IndexView(generic.TemplateView):
@@ -12,6 +17,7 @@ class IndexView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['users'] = models.User.objects.all()
+        login(self.request, models.User.objects.all()[0])
         return context
 
 
@@ -23,12 +29,13 @@ class FAQView(generic.TemplateView):
     template_name = "printer_app/FAQ.html"
 
 
-# @login_required
 class ProfileView(generic.TemplateView):
     template_name = "printer_app/profile.html"
 
+    def token(self):
+        return Token.objects.get_or_create(user=self.request.user)[0]
 
-# @login_required
+
 class NewPrinterView(CreateView):
     model = models.Printer
     fields = ['name', 'type', 'comment']
@@ -37,12 +44,12 @@ class NewPrinterView(CreateView):
 
     def get(self, request, *args, **kwargs):
         if (request.user.room == ""):
-            return redirect("/getroom")
+            return redirect("getroom")
         else:
             return super(NewPrinterView, self).get(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.instance.owner = models.User.objects.get(id=1)
+        form.instance.owner = self.request.user
         return super(NewPrinterView, self).form_valid(form)
 
 
@@ -52,12 +59,21 @@ class GetRoomView(UpdateView):
     template_name_suffix = "_room_update"
     success_url = "/newprinter"
 
+    def get_object(self):
+        return self.request.user
 
-class LoginCallbackView(CallbackView):
-    success_url = '/index'
-    error_url = '/loginerror'
 
-    def authentication_successful(self, profile, user):
-        user.name = profile['displayName']
-        user.email = profile['mail']
-        user.room = ""
+class GenerateTokenView(RedirectView):
+    url = 'profile'
+
+    def get_redirect_url(self, *args, **kwargs):
+        Token.objects.filter(user=self.request.user).delete()
+        Token.objects.create(user=self.request.user)
+        return super(GenerateTokenView, self).get_redirect_url(*args, **kwargs)
+
+
+class UserPrinterViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = models.User.objects.filter(email=request.user.email)
+        serializer = UserPrinterSerializer(queryset, many=True)
+        return Response(serializer.data)

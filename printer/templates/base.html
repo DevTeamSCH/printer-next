@@ -45,17 +45,16 @@
 
                     </ul>
                     <div class="uk-navbar-content uk-navbar-flip uk-hidden-small">
-                        {% if user.is_authtenticated %}
+                        {% if user.is_authenticated %}
                         <div class="uk-button-group">
                         <a class="uk-button uk-button-danger" href="profile">
                             <i class="uk-icon-user"></i> Profilom</a>
 
                         <button class="uk-button uk-button-danger">
-                            <i class="uk-icon-sign-out"> Kijelentkezés</button>
+                            <i class="uk-icon-sign-out"></i> Kijelentkezés</button>
                         </div>
                         {% else %}
-                        {{ user }}
-                        <button class="uk-button uk-button-danger" onClick="window.location.href= &#39; {% authsch_login_url %} &#39; ">
+                        <button class="uk-button uk-button-danger" onClick="window.location.href= '' "> 
                             <i class="uk-icon-sign-in"></i> Bejelentkezés</button>
                         {% endif %}
                     </div>

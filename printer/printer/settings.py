@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'printer_app',
-    'authsch'
+    'authsch',
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -106,10 +108,12 @@ AUTH_SCH = {
     'CLIENT_ID': '68289284849992503266',
     'SECRET_KEY': '7ilvVyLrrTvREfI2LLYjZsQWQ2ALr6bndCYz2kgi5Sz9x9z9JOij7y6Nq6YX1zAU3ZJt0qS49I3vGruQ',
     'SCOPES': [
-        'basic',
-        'displayName',
-        'mail'
-    ],
+                'basic',
+                'displayName',
+                'mail'
+                ],
+    'INTERNAL_ID_FIELD_NAME': 'auth_sch_internal_id',
+    'REFRESH_TOKEN_FIELD_NAME': 'refresh_token'
 }
 
 AUTH_USER_MODEL = "printer_app.User"
@@ -137,3 +141,9 @@ STATICFILES_DIRS = (
 )
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}

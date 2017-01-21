@@ -4,7 +4,7 @@
 {% block content %}
 <ul class="uk-list uk-list-space">
 {% for user in users %}
-    {# {% if user.is_active == True %} #}
+    {# {% if user.has_active_printers == True %} #}
     <li class="uk-h3">{{ user.name }}-{{ user.room }}</li>
     <li>
         <ul class="uk-list uk-list-striped uk-list-space">
