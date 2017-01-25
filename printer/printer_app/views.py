@@ -8,29 +8,28 @@ from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from rest_framework.response import Response
 from printer_app.serializers import UserPrinterSerializer
-from django.contrib.auth import login
+from django.urls import reverse_lazy
 
 
 class IndexView(generic.TemplateView):
-    template_name = "printer_app/index.html"
+    template_name = "printer_list.html"
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['users'] = models.User.objects.all()
-        login(self.request, models.User.objects.all()[0])
         return context
 
 
 class ClientView(generic.TemplateView):
-    template_name = "printer_app/client.html"
+    template_name = "client.html"
 
 
 class FAQView(generic.TemplateView):
-    template_name = "printer_app/FAQ.html"
+    template_name = "faq.html"
 
 
 class ProfileView(generic.TemplateView):
-    template_name = "printer_app/profile.html"
+    template_name = "profile.html"
 
     def token(self):
         return Token.objects.get_or_create(user=self.request.user)[0]
@@ -39,8 +38,8 @@ class ProfileView(generic.TemplateView):
 class NewPrinterView(CreateView):
     model = models.Printer
     fields = ['name', 'type', 'comment']
-    template_name_suffix = '_create'
-    success_url = '/index'
+    template_name = "printer_create.html"
+    success_url = reverse_lazy('index')
 
     def get(self, request, *args, **kwargs):
         if (request.user.room == ""):
@@ -56,8 +55,8 @@ class NewPrinterView(CreateView):
 class GetRoomView(UpdateView):
     model = models.User
     fields = ['room']
-    template_name_suffix = "_room_update"
-    success_url = "/newprinter"
+    template_name = "user_room_update.html"
+    success_url = reverse_lazy("newprinter")
 
     def get_object(self):
         return self.request.user

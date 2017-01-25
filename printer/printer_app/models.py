@@ -1,21 +1,17 @@
 from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 
 
-class User(AbstractBaseUser):
-    name = models.CharField(max_length=255, unique=True)
-    email = models.CharField(max_length=255, unique=True)
+class User(AbstractUser):
     room = models.CharField(max_length=255, default="")
     status = models.BooleanField(default=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
-
     def get_full_name(self):
-        return self.name
-
-    def get_short_name(self):
-        return self.name
+        """
+        Returns the first_name plus the last_name, with a space in between.
+        """
+        full_name = '%s %s' % (self.last_name, self.first_name)
+        return full_name.strip()
 
     @property
     def printers(self):

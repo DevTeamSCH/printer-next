@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<p>Név: TODO</p>
+
+<p>Nyomtatóim: TODO</p>
+
+<p>Access token: {{ view.token }}</p>
+<a href="/generateToken">Generate new token</a>
+{% endblock %}
