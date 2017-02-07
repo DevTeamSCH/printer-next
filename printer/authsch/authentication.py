@@ -1,4 +1,4 @@
-from social.backends.oauth import BaseOAuth2
+from social_core.backends.oauth import BaseOAuth2
 
 
 class AuthSCHOAuth2(BaseOAuth2):

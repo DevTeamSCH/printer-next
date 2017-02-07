@@ -2,9 +2,13 @@
 {% load staticfiles %}
 
 {% block content %}
-<form action="" method="post">
+<form class="uk-form-stacked" action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <div>
+      <label class="uk-form-label">Name</label>
+      <input class="uk-input uk-form-width-medium uk-form-small" id="name" type="text" name="name" />
+    </div>
     <input type="submit" value="Mentés" />
 </form>
 {% endblock %}

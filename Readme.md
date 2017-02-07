@@ -12,8 +12,6 @@
 
 ```` npm install````
 
-> Mivel a UIKit3 még beta ezért kézzel kell lefordítani npm install után node_modules mappában lévő uikit mappa Readme-je alapján.
-
 ```` cp example.env .env````
 
 > Ki kell tölteni a környezeti változokat.
