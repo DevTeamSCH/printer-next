@@ -1,4 +1,5 @@
 # from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import RedirectView
@@ -76,3 +77,8 @@ class UserPrinterViewSet(viewsets.ViewSet):
         queryset = models.User.objects.filter(email=request.user.email)
         serializer = UserPrinterSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("index")

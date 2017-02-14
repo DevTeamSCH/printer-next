@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
-from django.contrib.auth import logout
 from rest_framework import routers
 
+from printer_app.views import logout_view
 from . import views
 
 router = routers.DefaultRouter()
@@ -9,7 +9,7 @@ router.register(r'api', views.UserPrinterViewSet, base_name="printer")
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
+    url(r'^logout/$', logout_view,  name='logout'),
     url(r'^new-printer', views.NewPrinterView.as_view(), name="new-printer"),
     url(r'^client', views.ClientView.as_view(), name='client'),
     url(r'^FAQ', views.FAQView.as_view(), name='FAQ'),
