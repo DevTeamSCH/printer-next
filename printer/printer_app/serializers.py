@@ -13,4 +13,4 @@ class UserPrinterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('printers', 'status')
+        fields = ['printers']

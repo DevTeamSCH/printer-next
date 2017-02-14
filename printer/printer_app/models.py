@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     room = models.CharField(max_length=255, default="")
-    status = models.BooleanField(default=True)
 
     def get_full_name(self):
         """
