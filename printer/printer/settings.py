@@ -106,6 +106,7 @@ AUTHENTICATION_BACKENDS = [
 SOCIAL_AUTH_AUTHSCH_KEY = os.environ.get('PRINTER_SCHAUTH_CLIENT_ID')
 SOCIAL_AUTH_AUTHSCH_SECRET = os.environ.get('PRINTER_SCHAUTH_SECRET')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = "login/authsch"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
