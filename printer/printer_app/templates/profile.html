@@ -3,7 +3,9 @@
 
 {% block content %}
 
-<p>Név: TODO</p>
+<p>Név: {{ view.user.get_full_name }} </p>
+
+<p>Szoba: {{ view.user.room }}</p>
 
 <p>Nyomtatóim: TODO</p>
 

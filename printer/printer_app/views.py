@@ -34,6 +34,9 @@ class ProfileView(generic.TemplateView):
     def token(self):
         return Token.objects.get_or_create(user=self.request.user)[0]
 
+    def user(self):
+        return self.request.user
+
 
 class NewPrinterView(CreateView):
     model = models.Printer
