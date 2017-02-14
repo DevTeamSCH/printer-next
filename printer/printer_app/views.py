@@ -43,7 +43,7 @@ class NewPrinterView(CreateView):
 
     def get(self, request, *args, **kwargs):
         if request.user.room == "":
-            return redirect("getroom")
+            return redirect("get-room")
         else:
             return super(NewPrinterView, self).get(request, *args, **kwargs)
 
@@ -56,7 +56,7 @@ class GetRoomView(UpdateView):
     model = models.User
     fields = ['room']
     template_name = "user_room_update.html"
-    success_url = reverse_lazy("newPrinter")
+    success_url = reverse_lazy("new-printer")
 
     def get_object(self):
         return self.request.user
