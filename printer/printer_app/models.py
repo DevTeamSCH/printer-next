@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    room = models.CharField(max_length=255, default="")
+    room = models.CharField(max_length=255, default="", verbose_name="Szobaszám")
 
     def get_full_name(self):
         """
@@ -32,7 +32,7 @@ class Printer(models.Model):
         related_name='owned_printers',
         on_delete=models.CASCADE
     )
-    name = models.CharField(max_length=255)
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES)
+    name = models.CharField(max_length=255, verbose_name="Név")
+    type = models.CharField(max_length=2, choices=TYPE_CHOICES, verbose_name="Típus")
     status = models.BooleanField(default=False)
-    comment = models.TextField(null=True, blank=True)
+    comment = models.TextField(null=True, blank=True, verbose_name="Megjegyzés")
