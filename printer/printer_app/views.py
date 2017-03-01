@@ -7,6 +7,8 @@ from printer_app import models
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from rest_framework.response import Response
+
+from printer_app.forms import NewPrinterForm
 from printer_app.serializers import UserPrinterSerializer
 from django.urls import reverse_lazy
 
@@ -46,7 +48,7 @@ class ProfileView(generic.TemplateView):
 
 class NewPrinterView(CreateView):
     model = models.Printer
-    fields = ['name', 'type', 'comment']
+    form_class = NewPrinterForm
     template_name = "printer_create.html"
     success_url = reverse_lazy('index')
 

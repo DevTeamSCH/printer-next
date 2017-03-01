@@ -4,11 +4,14 @@
 {% block content %}
 <form class="uk-form-stacked" action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <div>
-      <label class="uk-form-label">Name</label>
-      <input class="uk-input uk-form-width-medium uk-form-small" id="name" type="text" name="name" />
-    </div>
-    <input type="submit" value="Mentés" />
+    {% for field in form %}
+        <div class="uk-margin">
+            <label class="uk-form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+            <div class="uk-form-controls">
+                {{ field }}
+            </div>
+        </div>
+    {% endfor %}
+    <input class="uk-button uk-button-primary" type="submit" value="Mentés" />
 </form>
 {% endblock %}
