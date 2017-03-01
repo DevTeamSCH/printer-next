@@ -8,7 +8,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from printer_app.forms import NewPrinterForm
+from printer_app.forms import NewPrinterForm, GetRoomForm
 from printer_app.serializers import UserPrinterSerializer
 from django.urls import reverse_lazy
 
@@ -65,8 +65,8 @@ class NewPrinterView(CreateView):
 
 class GetRoomView(UpdateView):
     model = models.User
-    fields = ['room']
-    template_name = "user_room_update.html"
+    form_class = GetRoomForm
+    template_name = "get_room.html"
 
     def get_object(self):
         self.success_url = reverse_lazy(self.request.GET.get('next', 'profile'))
