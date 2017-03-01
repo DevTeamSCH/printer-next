@@ -34,8 +34,14 @@ class ProfileView(generic.TemplateView):
     def token(self):
         return Token.objects.get_or_create(user=self.request.user)[0]
 
-    def user(self):
-        return self.request.user
+    def user_name(self):
+        return self.request.user.get_full_name()
+
+    def user_room(self):
+        if self.request.user.room == "":
+            return "Nincs megadva"
+        else:
+            return self.request.user.room
 
 
 class NewPrinterView(CreateView):
@@ -46,7 +52,7 @@ class NewPrinterView(CreateView):
 
     def get(self, request, *args, **kwargs):
         if request.user.room == "":
-            return redirect("get-room")
+            return redirect(reverse_lazy("get-room") + "?next=new-printer")
         else:
             return super(NewPrinterView, self).get(request, *args, **kwargs)
 
@@ -59,9 +65,9 @@ class GetRoomView(UpdateView):
     model = models.User
     fields = ['room']
     template_name = "user_room_update.html"
-    success_url = reverse_lazy("new-printer")
 
     def get_object(self):
+        self.success_url = reverse_lazy(self.request.GET.get('next', 'profile'))
         return self.request.user
 
 
