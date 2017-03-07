@@ -2,14 +2,15 @@ from django.contrib.auth import logout
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import RedirectView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from printer_app import models
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from rest_framework.response import Response
 
 from printer_app.forms import NewPrinterForm, GetRoomForm
-from printer_app.serializers import UserPrinterSerializer
+from printer_app.models import Printer
+from printer_app.serializers import UserPrinterSerializer, PrinterSerializer
 from django.urls import reverse_lazy
 
 
@@ -87,6 +88,29 @@ class UserPrinterViewSet(viewsets.ViewSet):
         queryset = models.User.objects.filter(email=request.user.email)
         serializer = UserPrinterSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        try:
+            printer = models.Printer.objects.get(pk=pk)
+        except models.models.ObjectDoesNotExist:
+            return Response("Requested object does not exist", 404)
+        if printer.owner == request.user:
+            serializer = PrinterSerializer(printer)
+            return Response(serializer.data)
+        return Response("Requested printer does not belong to this user", 403)
+
+    def update(self, request, pk=None):
+        try:
+            printer = models.Printer.objects.get(pk=pk)
+        except models.models.ObjectDoesNotExist:
+            return Response("Requested object does not exist", 404)
+        if printer.owner == request.user:
+            serializer = PrinterSerializer(data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            printer.status = serializer.validated_data['status']
+            printer.save()
+            return Response("ok")
+        return Response("Requested printer does not belong to this user", 403)
 
 
 def logout_view(request):
