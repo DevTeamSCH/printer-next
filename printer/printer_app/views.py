@@ -85,8 +85,8 @@ class GenerateTokenView(RedirectView):
 
 class UserPrinterViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = models.User.objects.filter(email=request.user.email)
-        serializer = UserPrinterSerializer(queryset, many=True)
+        queryset = request.user.printers
+        serializer = PrinterSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
