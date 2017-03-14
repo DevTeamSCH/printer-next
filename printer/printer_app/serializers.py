@@ -5,12 +5,6 @@ from rest_framework import serializers
 class PrinterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Printer
-        fields = ('id', 'name', 'status')
+        fields = ('id', 'name', 'status', 'type', 'comment')
 
 
-class UserPrinterSerializer(serializers.ModelSerializer):
-    printers = PrinterSerializer(many=True)
-
-    class Meta:
-        model = User
-        fields = ['printers']

@@ -1,17 +1,16 @@
 from django.contrib.auth import logout
-from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic.base import RedirectView
-from django.shortcuts import redirect, get_object_or_404
-from printer_app import models
-from rest_framework.authtoken.models import Token
-from rest_framework import viewsets
-from rest_framework.response import Response
-
-from printer_app.forms import NewPrinterForm, GetRoomForm
-from printer_app.models import Printer
-from printer_app.serializers import UserPrinterSerializer, PrinterSerializer
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import generic
+from django.views.generic.base import RedirectView
+from django.views.generic.edit import CreateView, UpdateView
+from rest_framework import mixins
+from rest_framework import viewsets
+from rest_framework.authtoken.models import Token
+
+from printer_app import models
+from printer_app.forms import NewPrinterForm, GetRoomForm
+from printer_app.serializers import PrinterSerializer
 
 
 class IndexView(generic.TemplateView):
@@ -83,34 +82,14 @@ class GenerateTokenView(RedirectView):
         return super(GenerateTokenView, self).get_redirect_url(*args, **kwargs)
 
 
-class UserPrinterViewSet(viewsets.ViewSet):
-    def list(self, request):
-        queryset = request.user.printers
-        serializer = PrinterSerializer(queryset, many=True)
-        return Response(serializer.data)
+class UserPrinterViewSet(mixins.ListModelMixin,
+                         mixins.RetrieveModelMixin,
+                         mixins.UpdateModelMixin,
+                         viewsets.GenericViewSet):
+    serializer_class = PrinterSerializer
 
-    def retrieve(self, request, pk=None):
-        try:
-            printer = models.Printer.objects.get(pk=pk)
-        except models.models.ObjectDoesNotExist:
-            return Response("Requested object does not exist", 404)
-        if printer.owner == request.user:
-            serializer = PrinterSerializer(printer)
-            return Response(serializer.data)
-        return Response("Requested printer does not belong to this user", 403)
-
-    def update(self, request, pk=None):
-        try:
-            printer = models.Printer.objects.get(pk=pk)
-        except models.models.ObjectDoesNotExist:
-            return Response("Requested object does not exist", 404)
-        if printer.owner == request.user:
-            serializer = PrinterSerializer(data=request.data, partial=True)
-            serializer.is_valid(raise_exception=True)
-            printer.status = serializer.validated_data['status']
-            printer.save()
-            return Response("ok")
-        return Response("Requested printer does not belong to this user", 403)
+    def get_queryset(self):
+        return self.request.user.printers
 
 
 def logout_view(request):
