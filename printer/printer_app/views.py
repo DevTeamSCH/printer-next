@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.forms import formset_factory, inlineformset_factory
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
@@ -32,9 +33,17 @@ class FAQView(generic.TemplateView):
 
 class ProfileView(generic.TemplateView):
     template_name = "profile.html"
+    printer_form_set = inlineformset_factory(models.User, models.Printer, form=NewPrinterForm, extra=0,
+                                             can_delete=False, fields=('name', 'status', 'type', 'comment'))
+
+    def get_formset(self):
+        return self.printer_form_set(instance=self.request.user)
 
     def token(self):
         return Token.objects.get_or_create(user=self.request.user)[0]
+
+    def user_printers(self):
+        return self.request.user.printers
 
     def user_name(self):
         return self.request.user.get_full_name()
@@ -44,6 +53,12 @@ class ProfileView(generic.TemplateView):
             return "Nincs megadva"
         else:
             return self.request.user.room
+
+    def post(self, request):
+        formset = self.printer_form_set(request.POST, request.FILES, instance=self.request.user)
+        if formset.is_valid():
+            formset.save()
+            return redirect("profile")
 
 
 class NewPrinterView(CreateView):
@@ -95,3 +110,4 @@ class UserPrinterViewSet(mixins.ListModelMixin,
 def logout_view(request):
     logout(request)
     return redirect("index")
+

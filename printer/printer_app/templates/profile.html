@@ -7,8 +7,30 @@
 
 <p>Szobaszám: {{ view.user_room }} <a href="{% url "get-room" %}">Megváltoztatás</a></p>
 
-<p>Nyomtatóim: TODO</p>
-
 <p>Access token: {{ view.token }}</p>
 <a href="{%  url "generate-token" %}">Generate new token</a>
+
+<div class="uk-margin">
+    Nyomtatóim:
+    <form class="uk-form-stacked" action="" method="post">
+        {% for form in view.get_formset %}
+            {{ view.get_formset.management_form }}
+            <div class="uk-card uk-card-default uk-card-body uk-margin">
+                {% csrf_token %}
+                {% for field in form.hidden_fields %}
+                    {{ field }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                        <div class="uk-form-controls">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <input class="uk-button uk-button-primary" type="submit" value="Mentés" />
+    </form>
+</div>
 {% endblock %}
