@@ -44,4 +44,4 @@ A felhasználó összes nyomtatója lekérhető a ``/api/my-printers/`` címen. 
 ]
 ````
 
-A nyomtató státusza módosítható a ``/api/my-printers/<id>/`` címen. A címre küldött GET kérésre csak a megadott id-jű nyomtató adatait adja vissza. PUT kéréssel a status mező értékét meg lehet adni. Erre a címre küldött kérésekre 404-es hibakódú válasz jön, ha hibás id van megadva és 403, ha a megadott id-jű nyomtató más felhasználóé.
+A nyomtató státusza módosítható a ``/api/my-printers/<id>/`` címen. A címre küldött GET kérésre csak a megadott id-jű nyomtató adatait adja vissza. Az adatokat PUT és PATCH üzenetekkel lehet módosítani.
