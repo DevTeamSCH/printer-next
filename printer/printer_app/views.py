@@ -42,9 +42,6 @@ class ProfileView(generic.TemplateView):
     def token(self):
         return Token.objects.get_or_create(user=self.request.user)[0]
 
-    def user_printers(self):
-        return self.request.user.printers
-
     def user_name(self):
         return self.request.user.get_full_name()
 

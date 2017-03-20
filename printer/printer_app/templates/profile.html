@@ -13,10 +13,10 @@
 <div class="uk-margin">
     Nyomtatóim:
     <form class="uk-form-stacked" action="" method="post">
+        {{ view.get_formset.management_form }}
+        {% csrf_token %}
         {% for form in view.get_formset %}
-            {{ view.get_formset.management_form }}
             <div class="uk-card uk-card-default uk-card-body uk-margin">
-                {% csrf_token %}
                 {% for field in form.hidden_fields %}
                     {{ field }}
                 {% endfor %}
