@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^logout/$', logout_view,  name='logout'),
     url(r'^new-printer', login_required(views.NewPrinterView.as_view()), name="new-printer"),
+    url(r'^delete-printer', login_required(views.DeletePrinterView.as_view()), name="delete-printer"),
     url(r'^client', views.ClientView.as_view(), name='client'),
     url(r'^FAQ', views.FAQView.as_view(), name='FAQ'),
     url(r'^profile', login_required(views.ProfileView.as_view()), name='profile'),

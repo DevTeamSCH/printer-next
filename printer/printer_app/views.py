@@ -1,10 +1,10 @@
 from django.contrib.auth import logout
-from django.forms import formset_factory, inlineformset_factory
+from django.forms import inlineformset_factory
+from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views import generic
-from django.views.generic.base import RedirectView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.base import RedirectView, TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
@@ -14,7 +14,7 @@ from printer_app.forms import NewPrinterForm, GetRoomForm
 from printer_app.serializers import PrinterSerializer
 
 
-class IndexView(generic.TemplateView):
+class IndexView(TemplateView):
     template_name = "printer_list.html"
 
     def get_context_data(self, **kwargs):
@@ -23,15 +23,15 @@ class IndexView(generic.TemplateView):
         return context
 
 
-class ClientView(generic.TemplateView):
+class ClientView(TemplateView):
     template_name = "client.html"
 
 
-class FAQView(generic.TemplateView):
+class FAQView(TemplateView):
     template_name = "faq.html"
 
 
-class ProfileView(generic.TemplateView):
+class ProfileView(TemplateView):
     template_name = "profile.html"
     printer_form_set = inlineformset_factory(models.User, models.Printer, form=NewPrinterForm, extra=0,
                                              can_delete=False, fields=('name', 'status', 'type', 'comment'))
@@ -108,3 +108,20 @@ def logout_view(request):
     logout(request)
     return redirect("index")
 
+
+class DeletePrinterView(DeleteView):
+    model = models.Printer
+    success_url = reverse_lazy("profile")
+    template_name = "printer_delete.html"
+
+    def get_object(self, queryset=None):
+        printer_id = self.request.GET.get('id', '')
+        if printer_id == '':
+            raise Http404
+        try:
+            printer = models.Printer.objects.get(pk=printer_id)
+        except models.models.ObjectDoesNotExist:
+            raise Http404
+        if not printer.owner == self.request.user:
+            raise Http404
+        return printer
