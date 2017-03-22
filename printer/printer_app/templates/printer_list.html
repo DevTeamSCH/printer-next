@@ -2,12 +2,12 @@
 {% load staticfiles %}
 
 {% block content %}
-<ul class="uk-list uk-list-space">
+<ul class="uk-list uk-list-large">
 {% for user in users %}
     {% if user.has_active_printers == True %}
     <li class="uk-h3">{{ user.get_full_name }} - {{ user.room }}</li>
     <li>
-        <ul class="uk-list uk-list-striped uk-list-space">
+        <ul class="uk-list uk-list-striped uk-list-large">
             {% for printer in user.printers %}
             {% if printer.status == True %}
                 <li>{{ printer.name }}</li>

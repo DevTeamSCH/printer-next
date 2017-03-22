@@ -23,22 +23,22 @@
           <ul class="uk-navbar-nav">
             <li>
               <a href="{% url "index" %}">
-                <i class="uk-icon-print"></i> Nyomtatók
+                <span uk-icon="icon:print"></span> Nyomtatók
               </a>
             </li>
             <li>
               <a href="new-printer">
-                <i class="uk-icon-plus"></i> Új nyomtató
+                <span uk-icon="icon:plus"></span> Új nyomtató
               </a>
             </li>
             <li>
               <a href="client">
-                <i class="uk-icon-download"></i> Kliens
+                <span uk-icon="icon:download"></span> Kliens
               </a>
             </li>
             <li>
               <a href="FAQ">
-                <i class="uk-icon-question"></i> Gy.I.K.
+                <span uk-icon="icon:question"></span> Gy.I.K.
               </a>
             </li>
           </ul>
@@ -49,15 +49,15 @@
             {% if user.is_authenticated %}
               <div class="uk-button-group">
                 <a class="uk-button uk-button-primary" href="profile">
-                  <i class="uk-icon-user"></i> Profilom</a>
+                  <span uk-icon="icon:user"></span> Profilom</a>
 
                   <a class="uk-button uk-button-danger" href="{% url "logout" %}">
-                    <i class="uk-icon-sign-out"></i> Kijelentkezés
+                    <span uk-icon="icon: sign-out"></span> Kijelentkezés
                   </a>
               </div>
             {% else %}
               <a class="uk-button uk-button-danger" href="{% url "social:begin" "authsch" %}">
-                <i class="uk-icon-sign-in"></i> Bejelentkezés
+                <span uk-icon="icon: sign-in"></span> Bejelentkezés
               </a>
             {% endif %}
             </div>
@@ -72,9 +72,11 @@
       </div>
       <div class="uk-margin-bottom uk-margin-top">
         <nav class="uk-navbar">
-          <div class="uk-container uk-container-center uk-text-center">
-            <i class="uk-icon-copyright"></i> Copyright
-          </div>
+            <div class="uk-navbar-center">
+                <div class="uk-container uk-text-center">
+                    ©Copyright
+                </div>
+            </div>
         </nav>
       </div>
     </div>
