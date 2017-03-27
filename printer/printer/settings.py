@@ -1,4 +1,6 @@
 import os
+from django.conf.global_settings import LANGUAGES
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,12 +31,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'social_django',
-    'authsch'
+    'authsch',
+    'rosetta'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -111,15 +115,20 @@ LOGIN_URL = "login/authsch"
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'hu'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('hu', _('Hungarian')),
+]
 
 
 # Static files (CSS, JavaScript, Images)
@@ -139,3 +148,5 @@ REST_FRAMEWORK = {
 }
 
 APPEND_SLASH = False
+# TODO: Ez ne maradjon benne
+ROSETTA_REQUIRES_AUTH = False
