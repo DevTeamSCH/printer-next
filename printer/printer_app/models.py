@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    room = models.CharField(max_length=255, default="", verbose_name="Szobaszám")
+    room = models.CharField(max_length=255, default="", verbose_name=_("Room number"))
 
     def get_full_name(self):
         """
@@ -23,8 +24,8 @@ class User(AbstractUser):
 
 class Printer(models.Model):
     TYPE_CHOICES = (
-        ("BW", "Black-White"),
-        ("CL", "Color")
+        ("BW", _("Black-White")),
+        ("CL", _("Color"))
     )
 
     owner = models.ForeignKey(
@@ -32,7 +33,7 @@ class Printer(models.Model):
         related_name='owned_printers',
         on_delete=models.CASCADE
     )
-    name = models.CharField(max_length=255, verbose_name="Név")
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES, verbose_name="Típus")
-    status = models.BooleanField(default=False)
-    comment = models.TextField(null=True, blank=True, verbose_name="Megjegyzés")
+    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    type = models.CharField(max_length=2, choices=TYPE_CHOICES, verbose_name=_("Type"))
+    status = models.BooleanField(default=False, verbose_name=_("Available"))
+    comment = models.TextField(null=True, blank=True, verbose_name=_("Comment"))

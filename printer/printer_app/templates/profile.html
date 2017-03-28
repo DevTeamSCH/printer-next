@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load i18n %}
 
 {% block content %}
 
-<p>Név: {{ view.user_name }} </p>
+<p>{% trans "Name" %}: {{ view.user_name }} </p>
 
-<p>Szobaszám: {{ view.user_room }} <a href="{% url "get-room" %}">Megváltoztatás</a></p>
+<p>{% trans "Room number" %}: {{ view.user_room }} <a href="{% url "get-room" %}">{% trans "Change" %}</a></p>
 
 <p>Access token: {{ view.token }}</p>
-<a href="{%  url "generate-token" %}">Generate new token</a>
+<a href="{%  url "generate-token" %}">{% trans "Generate new token" %}</a>
 
 <div class="uk-margin">
-    Nyomtatóim:
+    {% trans "My printers" %}:
     <form class="uk-form-stacked" action="" method="post">
         {{ view.get_formset.management_form }}
         {% csrf_token %}
@@ -28,10 +29,10 @@
                         </div>
                     </div>
                 {% endfor %}
-                <a class="uk-button uk-button-danger" href="delete-printer/?id={{ form.instance.id }}">Delete</a>
+                <a class="uk-button uk-button-danger" href="delete-printer/?id={{ form.instance.id }}">{% trans "Delete" %}</a>
             </div>
         {% endfor %}
-        <input class="uk-button uk-button-primary" type="submit" value="Mentés" />
+        <input class="uk-button uk-button-primary" type="submit" value={% trans "Save" %} />
     </form>
 </div>
 {% endblock %}

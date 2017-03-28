@@ -12,6 +12,7 @@ from rest_framework.authtoken.models import Token
 from printer_app import models
 from printer_app.forms import NewPrinterForm, GetRoomForm
 from printer_app.serializers import PrinterSerializer
+from django.utils.translation import gettext_lazy as _
 
 
 class IndexView(TemplateView):
@@ -47,7 +48,7 @@ class ProfileView(TemplateView):
 
     def user_room(self):
         if self.request.user.room == "":
-            return "Nincs megadva"
+            return _("N/A")
         else:
             return self.request.user.room
 

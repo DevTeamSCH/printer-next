@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-28 21:57+0200\n"
+"PO-Revision-Date: 2017-03-28 21:58+0200\n"
+"Last-Translator: b'Ferenc Marki-Zay <ferencmarkizay@gmail.com>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.7.12\n"
+
+#: .\models.py:7 .\templates\profile.html:9
+msgid "Room number"
+msgstr "Szobaszám"
+
+#: .\models.py:27
+msgid "Black-White"
+msgstr "Fekete-fehér"
+
+#: .\models.py:28
+msgid "Color"
+msgstr "Színes"
+
+#: .\models.py:36 .\templates\profile.html:7
+msgid "Name"
+msgstr "Név"
+
+#: .\models.py:37
+msgid "Type"
+msgstr "Típus"
+
+#: .\models.py:38
+msgid "Available"
+msgstr "Elérhető"
+
+#: .\models.py:39
+msgid "Comment"
+msgstr "Megjegyzés"
+
+#: .\templates\base.html:27
+msgid "Printers"
+msgstr "Nyomtatók"
+
+#: .\templates\base.html:32
+msgid "New printer"
+msgstr "Új nyomtató"
+
+#: .\templates\base.html:37
+msgid "Client"
+msgstr "Kliens"
+
+#: .\templates\base.html:42
+msgid "F.A.Q."
+msgstr "Gy.I.K."
+
+#: .\templates\base.html:53
+msgid "Profile"
+msgstr "Profil"
+
+#: .\templates\base.html:56
+msgid "Logout"
+msgstr "Kijelentkezés"
+
+#: .\templates\base.html:61
+msgid "Login"
+msgstr "Bejelentkezés"
+
+#: .\templates\get_room.html:6
+msgid "You need to provide your room number to add printers."
+msgstr "Meg kell adnod a szobaszámod mielőtt hozzáadhatsz nyomtatókat."
+
+#: .\templates\get_room.html:17 .\templates\printer_create.html:16
+#: .\templates\profile.html:35
+msgid "Save"
+msgstr "Mentés"
+
+#: .\templates\printer_delete.html:7
+msgid "Are you sure you want to delete"
+msgstr "Biztosan ki akarod törölni a következő nyomtatót:"
+
+#: .\templates\printer_delete.html:8
+msgid "Confirm"
+msgstr "Törlés"
+
+#: .\templates\profile.html:9
+msgid "Change"
+msgstr "Megváltoztatás"
+
+#: .\templates\profile.html:12
+msgid "Generate new token"
+msgstr "Új token generálása"
+
+#: .\templates\profile.html:15
+msgid "My printers"
+msgstr "Nyomtatóim"
+
+#: .\templates\profile.html:32
+msgid "Delete"
+msgstr "Törlés"
+
+#: .\views.py:51
+msgid "N/A"
+msgstr "Nincs megadva"
+
+#~ msgid "Not translated"
+#~ msgstr "Magyar"
