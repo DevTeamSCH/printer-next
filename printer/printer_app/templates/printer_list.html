@@ -10,7 +10,7 @@
         <ul class="uk-list uk-list-striped uk-list-large">
             {% for printer in user.printers %}
             {% if printer.status == True %}
-                <li>{{ printer.name }}</li>
+                <li class="uk-background-default">{{ printer.name }}</li>
             {% endif %}
             {% endfor %}
         </ul>
