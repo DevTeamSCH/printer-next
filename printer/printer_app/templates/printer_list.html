@@ -3,7 +3,6 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="">{% trans "Active printers" %}</h1>
 <ul uk-accordion>
         {% for user in users %}
             {% if user.has_active_printers %}
