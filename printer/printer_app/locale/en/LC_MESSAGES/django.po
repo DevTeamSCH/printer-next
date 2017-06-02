@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 21:57+0200\n"
+"POT-Creation-Date: 2017-06-02 21:43+0200\n"
 "PO-Revision-Date: 2017-03-28 21:57+0200\n"
 "Last-Translator: b'Ferenc Marki-Zay <ferencmarkizay@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "Color"
 msgid "Name"
 msgstr "Name"
 
-#: .\models.py:37
+#: .\models.py:37 .\templates\printer_list.html:17
 msgid "Type"
 msgstr "Type"
 
@@ -42,7 +42,7 @@ msgstr "Type"
 msgid "Available"
 msgstr "Available"
 
-#: .\models.py:39
+#: .\models.py:39 .\templates\printer_list.html:18
 msgid "Comment"
 msgstr "Comment"
 
