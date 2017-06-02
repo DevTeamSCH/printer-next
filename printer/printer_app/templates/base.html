@@ -72,7 +72,16 @@
         {% endblock %}
     </div>
     <div class="uk-container uk-padding">
-        <p style="text-align: center;">©Copyright DevTeam</p>
+        {% get_current_language as LANGUAGE_CODE %}
+        <p style="text-align: center;">
+            {% if LANGUAGE_CODE == "hu" %}
+                <a href="en{{ request.path }}">English</a>
+            {% endif %}
+            {% if LANGUAGE_CODE == "en" %}
+                <a href="{{ request.path|slice:"3:" }}">Hungarian</a>
+            {% endif %}
+             · ©Copyright DevTeam
+        </p>
     </div>
 </div>
 
