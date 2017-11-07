@@ -142,10 +142,10 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     )
 }
 
-APPEND_SLASH = False
 # TODO: Ez ne maradjon benne
 ROSETTA_REQUIRES_AUTH = False

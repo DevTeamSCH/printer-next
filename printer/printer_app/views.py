@@ -8,10 +8,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
 
-from printer_app import models
-from printer_app.forms import NewPrinterForm, GetRoomForm
-from printer_app.serializers import PrinterSerializer
+from . import models
+from .forms import NewPrinterForm, GetRoomForm
+from .serializers import PrinterSerializer
+
 from django.utils.translation import gettext_lazy as _
 
 
@@ -95,11 +97,9 @@ class GenerateTokenView(RedirectView):
         return super(GenerateTokenView, self).get_redirect_url(*args, **kwargs)
 
 
-class UserPrinterViewSet(mixins.ListModelMixin,
-                         mixins.RetrieveModelMixin,
-                         mixins.UpdateModelMixin,
-                         viewsets.GenericViewSet):
+class UserPrinterViewSet(viewsets.ModelViewSet):
     serializer_class = PrinterSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return self.request.user.printers

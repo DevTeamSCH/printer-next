@@ -7,4 +7,8 @@ class PrinterSerializer(serializers.ModelSerializer):
         model = Printer
         fields = ('id', 'name', 'status', 'type', 'comment')
 
+    def create(self, validated_data):
+        data = validated_data
+        data['owner'] = self.context.get('request').user
+        return Printer.objects.create(**data)
 
