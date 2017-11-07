@@ -6,10 +6,9 @@
 
 <p>{% trans "Name" %}: {{ view.user_name }} </p>
 
-<p>{% trans "Room number" %}: {{ view.user_room }} <a href="{% url "get-room" %}">{% trans "Change" %}</a></p>
+<p>{% trans "Room number" %}: {{ view.user_room }} | <a href="{% url "get-room" %}">{% trans "Change" %}</a></p>
 
-<p>Access token: {{ view.token }}</p>
-<a href="{%  url "generate-token" %}">{% trans "Generate new token" %}</a>
+<p>Access token: {{ view.token }} | <a href="{%  url "generate-token" %}">{% trans "Generate new token" %}</a></p>
 
 <div class="uk-margin">
     {% trans "My printers" %}:

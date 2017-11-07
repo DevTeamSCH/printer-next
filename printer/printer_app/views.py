@@ -131,3 +131,5 @@ class DeletePrinterView(DeleteView):
 class PrinterListView(viewsets.ReadOnlyModelViewSet):
     serializer_class = ActivePrinterSerializer
     queryset = models.Printer.objects.filter(status = True)
+
+

@@ -37,3 +37,17 @@ class Printer(models.Model):
     type = models.CharField(max_length=2, choices=TYPE_CHOICES, verbose_name=_("Type"))
     status = models.BooleanField(default=False, verbose_name=_("Available"))
     comment = models.TextField(null=True, blank=True, verbose_name=_("Comment"))
+
+
+class File(models.Model):
+    file = models.FileField(upload_to="")
+    owner = models.ForeignKey(
+        User,
+        related_name='owned_files',
+        on_delete=models.CASCADE
+    )
+    shared_with = models.ManyToManyField(
+        User,
+        related_name='shared_files'
+    )
+    uploaded = models.DateField(auto_now_add=True)
