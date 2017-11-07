@@ -49,7 +49,7 @@
                 <div class="uk-navbar-item">
                     {% if user.is_authenticated %}
                         <div class="uk-button-group">
-                            <a class="uk-button uk-button-primary" href="profile">
+                            <a class="uk-button uk-button-primary" href="{% url "profile" %}">
                                 <span uk-icon="icon:user"></span>{% trans "Profile" %}</a>
 
                             <a class="uk-button uk-button-danger" href="{% url "logout" %}">
