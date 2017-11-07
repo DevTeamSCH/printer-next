@@ -7,6 +7,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'api/my-printers', views.UserPrinterViewSet, base_name="printer")
+router.register(r'api/active-printers', views.PrinterListView, base_name="active-printer")
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
@@ -19,5 +20,5 @@ urlpatterns = [
     url(r'^get-room', login_required(views.GetRoomView.as_view()), name='get-room'),
     url(r'^generate-token', login_required(views.GenerateTokenView.as_view()), name='generate-token'),
     url(r'^', include(router.urls)),
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
 ]

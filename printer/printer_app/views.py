@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 
 from printer_app import models
 from printer_app.forms import NewPrinterForm, GetRoomForm
-from printer_app.serializers import PrinterSerializer
+from printer_app.serializers import PrinterSerializer, ActivePrinterSerializer
 from django.utils.translation import gettext_lazy as _
 
 
@@ -126,3 +126,8 @@ class DeletePrinterView(DeleteView):
         if not printer.owner == self.request.user:
             raise Http404
         return printer
+
+
+class PrinterListView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = ActivePrinterSerializer
+    queryset = models.Printer.objects.filter(status = True)
