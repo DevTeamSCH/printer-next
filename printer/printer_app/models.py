@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
 
+# TODO: Change to profile
 class User(AbstractUser):
     room = models.CharField(max_length=255, default="", verbose_name=_("Room number"))
 
@@ -16,6 +17,10 @@ class User(AbstractUser):
     @property
     def printers(self):
         return self.owned_printers.all()
+
+    @property
+    def active_printers(self):
+        return self.owned_printers.filter(status=True)
 
     @property
     def has_active_printers(self):

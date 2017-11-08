@@ -12,18 +12,11 @@ class PrinterSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     name = SerializerMethodField()
+    active_printers = PrinterSerializer(many=True)
 
     class Meta:
         model = User
-        fields = ('name', 'room')
+        fields = ('name', 'room', 'active_printers')
 
     def get_name(self, user):
         return user.get_full_name()
-
-
-class ActivePrinterSerializer(serializers.ModelSerializer):
-    owner = UserSerializer()
-
-    class Meta:
-        model = Printer
-        fields = ('name', 'comment', 'type', 'owner')

@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 
 from printer_app import models
 from printer_app.forms import NewPrinterForm, GetRoomForm
-from printer_app.serializers import PrinterSerializer, ActivePrinterSerializer
+from printer_app import serializers
 from django.utils.translation import gettext_lazy as _
 
 
@@ -99,7 +99,7 @@ class UserPrinterViewSet(mixins.ListModelMixin,
                          mixins.RetrieveModelMixin,
                          mixins.UpdateModelMixin,
                          viewsets.GenericViewSet):
-    serializer_class = PrinterSerializer
+    serializer_class = serializers.PrinterSerializer
 
     def get_queryset(self):
         return self.request.user.printers
@@ -129,7 +129,5 @@ class DeletePrinterView(DeleteView):
 
 
 class PrinterListView(viewsets.ReadOnlyModelViewSet):
-    serializer_class = ActivePrinterSerializer
-    queryset = models.Printer.objects.filter(status = True)
-
-
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
