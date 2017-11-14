@@ -1,18 +1,21 @@
 from django.contrib.auth import logout
 from django.forms import inlineformset_factory
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from requests import Response
 from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 
 from printer_app import models
-from printer_app.forms import NewPrinterForm, GetRoomForm
+from printer_app.forms import NewPrinterForm, GetRoomForm, FileUploadForm
 from printer_app import serializers
 from django.utils.translation import gettext_lazy as _
+
+from printer_app.models import File
 
 
 class IndexView(TemplateView):
@@ -131,3 +134,20 @@ class DeletePrinterView(DeleteView):
 class PrinterListView(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.UserSerializer
     queryset = models.User.objects.all()
+
+
+class FileView(TemplateView):
+    template_name = 'file-upload.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FileView, self).get_context_data(**kwargs)
+        context['form'] = FileUploadForm()
+        context['Files'] = File.objects.filter(owner = self.request.user)
+        return context
+
+    def post(self, request):
+        form = FileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.owner = self.request.user
+            form.save()
+        return HttpResponseRedirect(reverse_lazy('file-upload'))

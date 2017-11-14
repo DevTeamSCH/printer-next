@@ -1,6 +1,9 @@
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import static
 from django.contrib import admin
+
+from printer import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -12,3 +15,5 @@ urlpatterns += i18n_patterns(
     url(r'', include('printer_app.urls')),
     prefix_default_language=False
 )
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

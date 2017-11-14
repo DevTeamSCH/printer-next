@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^profile', login_required(views.ProfileView.as_view()), name='profile'),
     url(r'^get-room', login_required(views.GetRoomView.as_view()), name='get-room'),
     url(r'^generate-token', login_required(views.GenerateTokenView.as_view()), name='generate-token'),
+    url(r'^file-upload', login_required(views.FileView.as_view()), name='file-upload'),
     url(r'^', include(router.urls)),
     url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
 ]

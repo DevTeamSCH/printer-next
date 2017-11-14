@@ -146,6 +146,10 @@ REST_FRAMEWORK = {
     )
 }
 
+MEDIA_ROOT = os.environ.get('PRINTER_MEDIA_ROOT')
+
+MEDIA_URL = "/files/"
+
 APPEND_SLASH = False
 # TODO: Ez ne maradjon benne
 ROSETTA_REQUIRES_AUTH = False

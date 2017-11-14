@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
@@ -55,4 +56,8 @@ class File(models.Model):
         User,
         related_name='shared_files'
     )
-    uploaded = models.DateField(auto_now_add=True)
+    uploaded = models.DateTimeField(auto_now_add=True)
+    
+    def delete(self, using=None, keep_parents=False):
+        super(File, self).delete(self, using, keep_parents)
+        os.remove(self.file.path)

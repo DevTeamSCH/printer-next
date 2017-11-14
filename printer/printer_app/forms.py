@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from printer_app.models import Printer, User
+from printer_app.models import Printer, User, File
 
 base_classes = 'uk-form-width-medium uk-form-small'
 
@@ -25,3 +25,9 @@ class GetRoomForm(ModelForm):
     class Meta:
         model = User
         fields = ['room']
+
+
+class FileUploadForm(ModelForm):
+    class Meta:
+        model = File
+        fields = ['file']
