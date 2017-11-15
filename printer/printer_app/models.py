@@ -1,6 +1,7 @@
 import os
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 
@@ -57,7 +58,11 @@ class File(models.Model):
         related_name='shared_files'
     )
     uploaded = models.DateTimeField(auto_now_add=True)
-    
-    def delete(self, using=None, keep_parents=False):
-        super(File, self).delete(self, using, keep_parents)
-        os.remove(self.file.path)
+
+
+#Deletes file from filesystem when File object is deleted.
+@receiver(models.signals.post_delete, sender=File)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    if instance.file:
+        if os.path.isfile(instance.file.path):
+            os.remove(instance.file.path)

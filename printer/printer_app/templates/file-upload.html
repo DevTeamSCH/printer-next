@@ -16,6 +16,7 @@
         <tr>
             <th> {% trans "Filename" %} </th>
             <th> {% trans "Time" %} </th>
+            <th> {% trans "Delete" %} </th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
         <tr>
             <td>{{ file.file.name }}</td>
             <td>{{ file.uploaded }}</td>
+            <td><input type = "submit" value = '{% trans "Delete" %}'></input></td>
         </tr>
         {% endfor %}
     </tbody>
