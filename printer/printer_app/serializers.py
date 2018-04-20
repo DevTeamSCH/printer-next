@@ -1,12 +1,12 @@
 from rest_framework.fields import SerializerMethodField
 
-from printer_app.models import User, Printer
+from . import models
 from rest_framework import serializers
 
 
 class PrinterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Printer
+        model = models.Printer
         fields = ('id', 'name', 'status', 'type', 'comment')
 
 
@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     active_printers = PrinterSerializer(many=True)
 
     class Meta:
-        model = User
+        model = models.User
         fields = ('name', 'room', 'active_printers')
 
     def get_name(self, user):

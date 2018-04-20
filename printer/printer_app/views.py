@@ -8,6 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from requests import Response
 from rest_framework import mixins
 from rest_framework import viewsets
+from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 
 from printer_app import models
@@ -98,11 +99,14 @@ class GenerateTokenView(RedirectView):
         return super(GenerateTokenView, self).get_redirect_url(*args, **kwargs)
 
 
-class UserPrinterViewSet(mixins.ListModelMixin,
-                         mixins.RetrieveModelMixin,
-                         mixins.UpdateModelMixin,
-                         viewsets.GenericViewSet):
+class UserPrinterViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    viewsets.GenericViewSet
+):
     serializer_class = serializers.PrinterSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         return self.request.user.printers

@@ -142,6 +142,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     )
 }
@@ -150,6 +152,4 @@ MEDIA_ROOT = os.environ.get('PRINTER_MEDIA_ROOT')
 
 MEDIA_URL = "/files/"
 
-APPEND_SLASH = False
-# TODO: Ez ne maradjon benne
 ROSETTA_REQUIRES_AUTH = False

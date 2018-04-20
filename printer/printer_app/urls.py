@@ -6,8 +6,8 @@ from printer_app.views import logout_view
 from . import views
 
 router = routers.DefaultRouter()
-router.register(r'api/my-printers', views.UserPrinterViewSet, base_name="printer")
-router.register(r'api/active-printers', views.PrinterListView, base_name="active-printer")
+router.register(r'api/v1/my-printers', views.UserPrinterViewSet, base_name="printer")
+router.register(r'api/v1/active-printers', views.PrinterListView, base_name="active-printer")
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
