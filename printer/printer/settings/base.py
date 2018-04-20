@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('PRINTER_SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'social_django',
     'authsch',
-    'rosetta'
 ]
 
 MIDDLEWARE = [
@@ -106,8 +105,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SOCIAL_AUTH_AUTHSCH_KEY = os.environ.get('PRINTER_SCHAUTH_CLIENT_ID')
-SOCIAL_AUTH_AUTHSCH_SECRET = os.environ.get('PRINTER_SCHAUTH_SECRET')
+SOCIAL_AUTH_AUTHSCH_KEY = os.environ.get('SCHAUTH_CLIENT_ID')
+SOCIAL_AUTH_AUTHSCH_SECRET = os.environ.get('SCHAUTH_SECRET')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = "login/authsch/"
 
@@ -142,14 +141,11 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     )
 }
 
-MEDIA_ROOT = os.environ.get('PRINTER_MEDIA_ROOT')
+MEDIA_ROOT = os.environ.get('MEDIA_ROOT')
 
 MEDIA_URL = "/files/"
-
-ROSETTA_REQUIRES_AUTH = False
