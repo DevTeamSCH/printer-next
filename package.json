@@ -2,14 +2,12 @@
   "name": "printer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.1.1",
-    "uikit": "3.0.0-beta.21"
+    "uikit": "^3.0.0-beta.42"
   }
 }
