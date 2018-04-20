@@ -99,12 +99,7 @@ class GenerateTokenView(RedirectView):
         return super(GenerateTokenView, self).get_redirect_url(*args, **kwargs)
 
 
-class UserPrinterViewSet(
-    mixins.ListModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    viewsets.GenericViewSet
-):
+class UserPrinterViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PrinterSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
