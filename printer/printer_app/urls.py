@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from rest_framework import routers
 
@@ -10,16 +10,16 @@ router.register(r'api/v1/my-printers', views.UserPrinterViewSet, base_name="prin
 router.register(r'api/v1/active-printers', views.PrinterListView, base_name="active-printer")
 
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^logout/$', logout_view,  name='logout'),
-    url(r'^new-printer', login_required(views.NewPrinterView.as_view()), name="new-printer"),
-    url(r'^delete-printer', login_required(views.DeletePrinterView.as_view()), name="delete-printer"),
-    url(r'^client', views.ClientView.as_view(), name='client'),
-    url(r'^FAQ', views.FAQView.as_view(), name='FAQ'),
-    url(r'^profile', login_required(views.ProfileView.as_view()), name='profile'),
-    url(r'^get-room', login_required(views.GetRoomView.as_view()), name='get-room'),
-    url(r'^generate-token', login_required(views.GenerateTokenView.as_view()), name='generate-token'),
-    url(r'^file-upload', login_required(views.FileView.as_view()), name='file-upload'),
-    url(r'^', include(router.urls)),
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
+    path('', views.IndexView.as_view(), name='index'),
+    path('logout/', logout_view,  name='logout'),
+    path('new-printer', login_required(views.NewPrinterView.as_view()), name="new-printer"),
+    path('delete-printer', login_required(views.DeletePrinterView.as_view()), name="delete-printer"),
+    path('client', views.ClientView.as_view(), name='client'),
+    path('FAQ', views.FAQView.as_view(), name='FAQ'),
+    path('profile', login_required(views.ProfileView.as_view()), name='profile'),
+    path('get-room', login_required(views.GetRoomView.as_view()), name='get-room'),
+    path('generate-token', login_required(views.GenerateTokenView.as_view()), name='generate-token'),
+    path('file-upload', login_required(views.FileView.as_view()), name='file-upload'),
+    path('', include(router.urls)),
+    path('api/', include('rest_framework.urls', namespace='rest_framework')),
 ]

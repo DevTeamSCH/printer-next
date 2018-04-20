@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -6,13 +6,13 @@ from django.contrib import admin
 from printer import settings
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^rosetta/', include('rosetta.urls')),
+    path('admin/', admin.site.urls),
+    path('rosetta/', include('rosetta.urls')),
 ]
 
 urlpatterns += i18n_patterns(
-    url('', include('social_django.urls', namespace='social')),
-    url(r'', include('printer_app.urls')),
+    path('', include('social_django.urls', namespace='social')),
+    path('', include('printer_app.urls')),
     prefix_default_language=False
 )
 
