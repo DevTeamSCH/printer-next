@@ -106,6 +106,9 @@ class UserPrinterViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.printers
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 def logout_view(request):
     logout(request)
