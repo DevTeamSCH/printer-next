@@ -60,7 +60,7 @@ class File(models.Model):
     uploaded = models.DateTimeField(auto_now_add=True)
 
 
-#Deletes file from filesystem when File object is deleted.
+# Deletes file from filesystem when File object is deleted.
 @receiver(models.signals.post_delete, sender=File)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.file:

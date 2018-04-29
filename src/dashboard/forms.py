@@ -1,11 +1,11 @@
-from django.forms import ModelForm
+from django import forms
 
-from printer_app.models import Printer, User, File
+from . import models
 
 base_classes = 'uk-form-width-medium uk-form-small'
 
 
-class NewPrinterForm(ModelForm):
+class NewPrinterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(NewPrinterForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs = {'class': base_classes + ' uk-input'}
@@ -13,21 +13,21 @@ class NewPrinterForm(ModelForm):
         self.fields['comment'].widget.attrs = {'class': base_classes + ' uk-textarea'}
 
     class Meta:
-        model = Printer
+        model = models.Printer
         fields = ['name', 'type', 'comment']
 
 
-class GetRoomForm(ModelForm):
+class GetRoomForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(GetRoomForm, self).__init__(*args, **kwargs)
         self.fields['room'].widget.attrs = {'class': base_classes + ' uk-input'}
 
     class Meta:
-        model = User
+        model = models.User
         fields = ['room']
 
 
-class FileUploadForm(ModelForm):
+class FileUploadForm(forms.ModelForm):
     class Meta:
-        model = File
+        model = models.File
         fields = ['file']

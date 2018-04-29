@@ -1,25 +1,20 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, mixins
 from django.forms import inlineformset_factory
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic.base import RedirectView, TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from requests import Response
-from rest_framework import mixins
+from django.views.generic import base, edit
+from django.utils.translation import gettext_lazy as _
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 
-from printer_app import models
-from printer_app.forms import NewPrinterForm, GetRoomForm, FileUploadForm
-from printer_app import serializers
-from django.utils.translation import gettext_lazy as _
-
-from printer_app.models import File
+from . import models
+from . import forms
+from . import serializers
 
 
-class IndexView(TemplateView):
+class IndexView(base.TemplateView):
     template_name = "printer_list.html"
 
     def get_context_data(self, **kwargs):
@@ -28,18 +23,23 @@ class IndexView(TemplateView):
         return context
 
 
-class ClientView(TemplateView):
+class ClientView(base.TemplateView):
     template_name = "client.html"
 
 
-class FAQView(TemplateView):
+class FAQView(base.TemplateView):
     template_name = "faq.html"
 
 
-class ProfileView(TemplateView):
+class ProfileView(mixins.LoginRequiredMixin, base.TemplateView):
     template_name = "profile.html"
-    printer_form_set = inlineformset_factory(models.User, models.Printer, form=NewPrinterForm, extra=0,
-                                             can_delete=False, fields=('name', 'status', 'type', 'comment'))
+    printer_form_set = inlineformset_factory(
+        models.User, models.Printer,
+        form=forms.NewPrinterForm,
+        extra=0,
+        can_delete=False,
+        fields=('name', 'status', 'type', 'comment')
+    )
 
     def get_formset(self):
         return self.printer_form_set(instance=self.request.user)
@@ -63,9 +63,9 @@ class ProfileView(TemplateView):
             return redirect("profile")
 
 
-class NewPrinterView(CreateView):
+class NewPrinterView(mixins.LoginRequiredMixin, edit.CreateView):
     model = models.Printer
-    form_class = NewPrinterForm
+    form_class = forms.NewPrinterForm
     template_name = "printer_create.html"
     success_url = reverse_lazy('index')
 
@@ -80,9 +80,9 @@ class NewPrinterView(CreateView):
         return super(NewPrinterView, self).form_valid(form)
 
 
-class GetRoomView(UpdateView):
+class GetRoomView(mixins.LoginRequiredMixin, edit.UpdateView):
     model = models.User
-    form_class = GetRoomForm
+    form_class = forms.GetRoomForm
     template_name = "get_room.html"
 
     def get_object(self):
@@ -90,7 +90,7 @@ class GetRoomView(UpdateView):
         return self.request.user
 
 
-class GenerateTokenView(RedirectView):
+class GenerateTokenView(mixins.LoginRequiredMixin, base.RedirectView):
     url = 'profile'
 
     def get_redirect_url(self, *args, **kwargs):
@@ -115,22 +115,21 @@ def logout_view(request):
     return redirect("index")
 
 
-class DeletePrinterView(DeleteView):
+class DeletePrinterView(mixins.LoginRequiredMixin, edit.DeleteView):
     model = models.Printer
     success_url = reverse_lazy("profile")
-    template_name = "printer_delete.html"
 
-    def get_object(self, queryset=None):
-        printer_id = self.request.GET.get('id', '')
-        if printer_id == '':
-            raise Http404
-        try:
-            printer = models.Printer.objects.get(pk=printer_id)
-        except models.models.ObjectDoesNotExist:
-            raise Http404
-        if not printer.owner == self.request.user:
-            raise Http404
-        return printer
+    # def get_object(self, queryset=None):
+    #    printer_id = self.request.GET.get('id', '')
+    #    if printer_id == '':
+    #        raise Http404
+    #    try:
+    #        printer = models.Printer.objects.get(pk=printer_id)
+    #    except models.models.ObjectDoesNotExist:
+    #        raise Http404
+    #    if not printer.owner == self.request.user:
+    #        raise Http404
+    #    return printer
 
 
 class PrinterListView(viewsets.ReadOnlyModelViewSet):
@@ -138,17 +137,17 @@ class PrinterListView(viewsets.ReadOnlyModelViewSet):
     queryset = models.User.objects.all()
 
 
-class FileView(TemplateView):
+class FileView(mixins.LoginRequiredMixin, base.TemplateView):
     template_name = 'file-upload.html'
 
     def get_context_data(self, **kwargs):
         context = super(FileView, self).get_context_data(**kwargs)
-        context['form'] = FileUploadForm()
-        context['Files'] = File.objects.filter(owner = self.request.user)
+        context['form'] = forms.FileUploadForm()
+        context['Files'] = models.File.objects.filter(owner=self.request.user)
         return context
 
     def post(self, request):
-        form = FileUploadForm(request.POST, request.FILES)
+        form = forms.FileUploadForm(request.POST, request.FILES)
         if form.is_valid():
             form.instance.owner = self.request.user
             form.save()

@@ -12,7 +12,7 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('', include('social_django.urls', namespace='social')),
-    path('', include('printer_app.urls')),
+    path('', include('dashboard.urls')),
     prefix_default_language=False
 )
 

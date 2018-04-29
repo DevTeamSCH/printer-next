@@ -1,3 +1,4 @@
+# flake8: noqa
 import os
 from django.utils.translation import gettext_lazy as _
 
@@ -26,11 +27,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'printer_app',
     'rest_framework',
     'rest_framework.authtoken',
     'social_django',
     'authsch',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -96,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'printer_app.User'
+AUTH_USER_MODEL = 'dashboard.User'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
