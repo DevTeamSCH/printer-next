@@ -15,7 +15,7 @@ from . import serializers
 
 
 class IndexView(base.TemplateView):
-    template_name = "printer_list.html"
+    template_name = "dashboard/printer_list.html"
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -24,15 +24,15 @@ class IndexView(base.TemplateView):
 
 
 class ClientView(base.TemplateView):
-    template_name = "client.html"
+    template_name = "dashboard/client.html"
 
 
 class FAQView(base.TemplateView):
-    template_name = "faq.html"
+    template_name = "dashboard/faq.html"
 
 
 class ProfileView(mixins.LoginRequiredMixin, base.TemplateView):
-    template_name = "profile.html"
+    template_name = "dashboard/profile.html"
     printer_form_set = inlineformset_factory(
         models.User, models.Printer,
         form=forms.NewPrinterForm,
@@ -66,7 +66,7 @@ class ProfileView(mixins.LoginRequiredMixin, base.TemplateView):
 class NewPrinterView(mixins.LoginRequiredMixin, edit.CreateView):
     model = models.Printer
     form_class = forms.NewPrinterForm
-    template_name = "printer_create.html"
+    # template_name = "printer_create.html"
     success_url = reverse_lazy('index')
 
     def get(self, request, *args, **kwargs):
@@ -119,18 +119,6 @@ class DeletePrinterView(mixins.LoginRequiredMixin, edit.DeleteView):
     model = models.Printer
     success_url = reverse_lazy("profile")
 
-    # def get_object(self, queryset=None):
-    #    printer_id = self.request.GET.get('id', '')
-    #    if printer_id == '':
-    #        raise Http404
-    #    try:
-    #        printer = models.Printer.objects.get(pk=printer_id)
-    #    except models.models.ObjectDoesNotExist:
-    #        raise Http404
-    #    if not printer.owner == self.request.user:
-    #        raise Http404
-    #    return printer
-
 
 class PrinterListView(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.UserSerializer
@@ -138,7 +126,7 @@ class PrinterListView(viewsets.ReadOnlyModelViewSet):
 
 
 class FileView(mixins.LoginRequiredMixin, base.TemplateView):
-    template_name = 'file-upload.html'
+    template_name = 'dashboard/file_upload.html'
 
     def get_context_data(self, **kwargs):
         context = super(FileView, self).get_context_data(**kwargs)
