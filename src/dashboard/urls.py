@@ -20,5 +20,4 @@ urlpatterns = [
     path('generate-token', views.GenerateTokenView.as_view(), name='generate-token'),
     path('file-upload', views.FileView.as_view(), name='file-upload'),
     path('api/v1/', include(router.urls)),
-    path('api/', include('rest_framework.urls', namespace='rest_framework')),
 ]
