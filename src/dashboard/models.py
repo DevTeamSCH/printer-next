@@ -1,32 +1,10 @@
 import os
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
 
-
-# TODO: Change to profile
-class User(AbstractUser):
-    room = models.CharField(max_length=255, default="", verbose_name=_("Room number"))
-
-    def get_full_name(self):
-        """
-        Returns the first_name plus the last_name, with a space in between.
-        """
-        full_name = '%s %s' % (self.last_name, self.first_name)
-        return full_name.strip()
-
-    @property
-    def printers(self):
-        return self.owned_printers.all()
-
-    @property
-    def active_printers(self):
-        return self.owned_printers.filter(status=True)
-
-    @property
-    def has_active_printers(self):
-        return any(printer.status for printer in self.printers)
+from account.models import Profile
 
 
 class Printer(models.Model):
@@ -36,7 +14,7 @@ class Printer(models.Model):
     )
 
     owner = models.ForeignKey(
-        User,
+        Profile,
         related_name='owned_printers',
         on_delete=models.CASCADE
     )
@@ -49,12 +27,12 @@ class Printer(models.Model):
 class File(models.Model):
     file = models.FileField(upload_to="")
     owner = models.ForeignKey(
-        User,
+        Profile,
         related_name='owned_files',
         on_delete=models.CASCADE
     )
     shared_with = models.ManyToManyField(
-        User,
+        Profile,
         related_name='shared_files'
     )
     uploaded = models.DateTimeField(auto_now_add=True)

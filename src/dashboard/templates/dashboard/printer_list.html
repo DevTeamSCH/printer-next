@@ -4,12 +4,12 @@
 
 {% block content %}
 <ul uk-accordion>
-        {% for user in users %}
-            {% if user.has_active_printers %}
+        {% for profile in profiles %}
+            {% if profile.has_active_printers %}
                 <li>
-                    <h3 class="uk-accordion-title">{{ user.get_full_name }} - {{ user.room }}</h3>
+                    <h3 class="uk-accordion-title">{{ profile.get_full_name }} - {{ profile.room }}</h3>
                     <div class="uk-accordion-content">
-                        {% for printer in user.printers %}
+                        {% for printer in profile.printers %}
                             {% if printer.status == True %}
                                 <dl class="uk-description-list uk-description-list-divider">
                                     <dt>{{ printer.name }}</dt>

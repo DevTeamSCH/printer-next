@@ -1,6 +1,7 @@
 from django import forms
 
 from . import models
+from account.models import Profile
 
 base_classes = 'uk-form-width-medium uk-form-small'
 
@@ -23,7 +24,7 @@ class GetRoomForm(forms.ModelForm):
         self.fields['room'].widget.attrs = {'class': base_classes + ' uk-input'}
 
     class Meta:
-        model = models.User
+        model = Profile
         fields = ['room']
 
 

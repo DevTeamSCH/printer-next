@@ -3,4 +3,3 @@ from . import models
 
 # Register your models here.
 admin.register(models.Printer)
-admin.register(models.User)
