@@ -4,21 +4,30 @@
 #
 #    pip-compile --output-file development.txt development.in
 #
+certifi==2018.4.16        # via requests
+chardet==3.0.4            # via requests
 click==6.7                # via pip-tools
-defusedxml==0.5.0rc1      # via python3-openid, social-auth-core
-Django==1.10.5
-djangorestframework==3.5.3
+defusedxml==0.5.0         # via python3-openid, social-auth-core
+django-rosetta==0.8.1
+django-social-authsch==0.1
+Django==2.0.4             # via django-rosetta
+djangorestframework==3.8.2
 first==2.0.1              # via pip-tools
 flake8==3.2.1
+idna==2.6                 # via requests
 mccabe==0.5.3             # via flake8
-oauthlib==2.0.1           # via requests-oauthlib, social-auth-core
+microsofttranslator==0.8  # via django-rosetta
+oauthlib==2.0.7           # via requests-oauthlib, social-auth-core
 pip-tools==1.8.0
+polib==1.1.0              # via django-rosetta
 pycodestyle==2.2.0        # via flake8
 pyflakes==1.3.0           # via flake8
-pyjwt==1.4.2              # via social-auth-core
-python3-openid==3.0.10    # via social-auth-core
-requests-oauthlib==0.7.0  # via social-auth-core
-requests==2.13.0          # via requests-oauthlib, social-auth-core
-six==1.10.0               # via pip-tools, social-auth-app-django, social-auth-core
-social-auth-app-django==1.0.1
-social-auth-core==1.1.0
+PyJWT==1.6.1              # via social-auth-core
+python3-openid==3.1.0     # via social-auth-core
+pytz==2018.4              # via django
+requests-oauthlib==0.8.0  # via social-auth-core
+requests==2.18.4          # via django-rosetta, microsofttranslator, requests-oauthlib, social-auth-core
+six==1.11.0               # via django-rosetta, microsofttranslator, pip-tools, social-auth-app-django, social-auth-core
+social-auth-app-django==2.1.0  # via django-social-authsch
+social-auth-core==1.7.0   # via django-social-authsch, social-auth-app-django
+urllib3==1.22             # via requests

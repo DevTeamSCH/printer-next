@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+<div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type = "submit" value='{% trans "Upload" %}'></input>
+    </form>
+</div>
+<div>
+    <table class="uk-table">
+    <thead>
+        <tr>
+            <th> {% trans "Filename" %} </th>
+            <th> {% trans "Time" %} </th>
+            <th> {% trans "Delete" %} </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for file in Files %}
+        <tr>
+            <td>{{ file.file.name }}</td>
+            <td>{{ file.uploaded }}</td>
+            <td><input type = "submit" value = '{% trans "Delete" %}'></input></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<div>shared
+
+</div>
+{% endblock %}

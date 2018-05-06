@@ -4,3 +4,6 @@ db.sqlite3
 node_modules/
 .env
 yarn.lock
+.idea/*
+venv/
+*.iml

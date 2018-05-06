@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+<ul uk-accordion>
+        {% for profile in profiles %}
+            {% if profile.has_active_printers %}
+                <li>
+                    <h3 class="uk-accordion-title">{{ profile.get_full_name }} - {{ profile.room }}</h3>
+                    <div class="uk-accordion-content">
+                        {% for printer in profile.printers %}
+                            {% if printer.status == True %}
+                                <dl class="uk-description-list uk-description-list-divider">
+                                    <dt>{{ printer.name }}</dt>
+                                    <dd>
+                                        {% trans "Type" %}: {{ printer.get_type_display }} <br />
+                                        {% if printer.comment %}{% trans "Comment" %}: {{ printer.comment }} {% endif %}
+                                    </dd>
+                                </dl>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </li>
+            {% endif %}
+        {% endfor %}
+</ul>
+{% endblock %}
