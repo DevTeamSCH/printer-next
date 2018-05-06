@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     active_printers = PrinterSerializer(many=True)
 
     class Meta:
-        model = models.User
+        model = models.Profile
         fields = ('name', 'room', 'active_printers')
 
     def get_name(self, user):
