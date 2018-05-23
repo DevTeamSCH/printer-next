@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import base, edit
 from django.utils.translation import gettext_lazy as _
+from django.http import HttpRedirectResponse
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
