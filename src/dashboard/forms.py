@@ -31,4 +31,10 @@ class GetRoomForm(forms.ModelForm):
 class FileUploadForm(forms.ModelForm):
     class Meta:
         model = models.File
-        fields = ['file']
+        fields = ['file', 'shared_with']
+
+
+class SharedWithForm(forms.ModelForm):
+    class Meta:
+        model = models.File
+        fields = ['shared_with']

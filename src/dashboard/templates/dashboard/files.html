@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div>
+    <a class="uk-button uk-button-primary" href="{% url "file-upload" %}">
+      <span uk-icon="icon:upload" class="uk-margin-small-right"></span> {% trans 'File Upload' %}
+    </a>
+    <table class="uk-table">
+    <thead>
+      <tr>
+        <th>{% trans "Filename" %}</th>
+        <th>{% trans "Time" %}</th>
+        <th>{% trans "Operations" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in uploaded_files %}
+      <tr>
+        <td><a href="{{ file.file.url }}">{{ file.file.name }}</a></td>
+        <td>{{ file.uploaded }}</td>
+        <td>
+          <a class="uk-button uk-button-primary" href="{% url "file-share" file.id %}" >
+            <span uk-icon="icon:social" class="uk-margin-small-right"></span> {% trans "Share" %}
+          </a>
+          <a class="uk-button uk-button-danger" href="{% url "file-delete" file.id %}" >
+            <span uk-icon="icon:trash" class="uk-margin-small-right"></span> {% trans "Delete" %}
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <table class="uk-table">
+    <thead>
+      <tr>
+        <th> {% trans "Filename" %} </th>
+        <th> {% trans "Time" %} </th>
+        <th> {% trans "Owner" %} </th>
+      </tr>
+    </thead>
+    <h3>{% trans "Shared With Me" %}</h3>
+    <tbody>
+      {% for file in shared_files %}
+      <tr>
+        <td><a href="{{ file.file.url }}" >{{ file.file.name }}</a></td>
+        <td>{{ file.uploaded }}</td>
+        <td>{{ file.owner }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

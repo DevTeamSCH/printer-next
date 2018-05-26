@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-02 21:43+0200\n"
+"POT-Creation-Date: 2018-05-26 22:51+0000\n"
 "PO-Revision-Date: 2017-03-28 21:57+0200\n"
 "Last-Translator: b'Ferenc Marki-Zay <ferencmarkizay@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,98 +18,127 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.7.12\n"
 
-#: .\models.py:7 .\templates\profile.html:9
-msgid "Room number"
-msgstr "Room number"
-
-#: .\models.py:27
+#: dashboard/models.py:13
 msgid "Black-White"
 msgstr "Black and white"
 
-#: .\models.py:28
+#: dashboard/models.py:14
 msgid "Color"
 msgstr "Color"
 
-#: .\models.py:36 .\templates\profile.html:7
+#: dashboard/models.py:22 dashboard/templates/dashboard/profile.html:7
 msgid "Name"
 msgstr "Name"
 
-#: .\models.py:37 .\templates\printer_list.html:17
+#: dashboard/models.py:23 dashboard/templates/dashboard/printer_list.html:17
 msgid "Type"
 msgstr "Type"
 
-#: .\models.py:38
+#: dashboard/models.py:24
 msgid "Available"
 msgstr "Available"
 
-#: .\models.py:39 .\templates\printer_list.html:18
+#: dashboard/models.py:25 dashboard/templates/dashboard/printer_list.html:18
 msgid "Comment"
 msgstr "Comment"
 
-#: .\templates\base.html:27
-msgid "Printers"
-msgstr "Printers"
-
-#: .\templates\base.html:32
-msgid "New printer"
-msgstr "New printer"
-
-#: .\templates\base.html:37
-msgid "Client"
-msgstr "Client"
-
-#: .\templates\base.html:42
-msgid "F.A.Q."
-msgstr "F.A.Q."
-
-#: .\templates\base.html:53
-msgid "Profile"
-msgstr "Profile"
-
-#: .\templates\base.html:56
-msgid "Logout"
-msgstr "Logout"
-
-#: .\templates\base.html:61
-msgid "Login"
-msgstr "Login"
-
-#: .\templates\get_room.html:6
-msgid "You need to provide your room number to add printers."
-msgstr "You need to provide your room number to add printers."
-
-#: .\templates\get_room.html:17 .\templates\printer_create.html:16
-#: .\templates\profile.html:35
-msgid "Save"
-msgstr "Save"
-
-#: .\templates\printer_delete.html:7
-msgid "Are you sure you want to delete"
-msgstr "Are you sure you want to delete"
-
-#: .\templates\printer_delete.html:8
+#: dashboard/templates/dashboard/file_form.html:20
 msgid "Confirm"
 msgstr "Confirm"
 
-#: .\templates\profile.html:9
-msgid "Change"
-msgstr "Change"
+#: dashboard/templates/dashboard/files.html:8
+msgid "File Upload"
+msgstr ""
 
-#: .\templates\profile.html:12
-msgid "Generate new token"
-msgstr "Generate new token"
+#: dashboard/templates/dashboard/files.html:13
+#: dashboard/templates/dashboard/files.html:38
+msgid "Filename"
+msgstr ""
 
-#: .\templates\profile.html:15
-msgid "My printers"
-msgstr "My printers"
+#: dashboard/templates/dashboard/files.html:14
+#: dashboard/templates/dashboard/files.html:39
+msgid "Time"
+msgstr ""
 
-#: .\templates\profile.html:32
+#: dashboard/templates/dashboard/files.html:15
+msgid "Operations"
+msgstr ""
+
+#: dashboard/templates/dashboard/files.html:25
+msgid "Share"
+msgstr ""
+
+#: dashboard/templates/dashboard/files.html:28
+#: dashboard/templates/dashboard/profile.html:31
 msgid "Delete"
 msgstr "Delete"
 
-#: .\views.py:51
+#: dashboard/templates/dashboard/files.html:40
+msgid "Owner"
+msgstr ""
+
+#: dashboard/templates/dashboard/files.html:43
+msgid "Shared With Me"
+msgstr ""
+
+#: dashboard/templates/dashboard/get_room.html:6
+msgid "You need to provide your room number to add printers."
+msgstr "You need to provide your room number to add printers."
+
+#: dashboard/templates/dashboard/get_room.html:17
+#: dashboard/templates/dashboard/printer_form.html:16
+#: dashboard/templates/dashboard/profile.html:34
+msgid "Save"
+msgstr "Save"
+
+#: dashboard/templates/dashboard/profile.html:9
+msgid "Room number"
+msgstr "Room number"
+
+#: dashboard/templates/dashboard/profile.html:9
+msgid "Change"
+msgstr "Change"
+
+#: dashboard/templates/dashboard/profile.html:11
+msgid "Generate new token"
+msgstr "Generate new token"
+
+#: dashboard/templates/dashboard/profile.html:14
+msgid "My printers"
+msgstr "My printers"
+
+#: dashboard/validators.py:9
+#, python-format
+msgid "Too big file. %(size)d"
+msgstr ""
+
+#: dashboard/views.py:57
 msgid "N/A"
 msgstr "N/A"
+
+#~ msgid "Printers"
+#~ msgstr "Printers"
+
+#~ msgid "New printer"
+#~ msgstr "New printer"
+
+#~ msgid "Client"
+#~ msgstr "Client"
+
+#~ msgid "F.A.Q."
+#~ msgstr "F.A.Q."
+
+#~ msgid "Profile"
+#~ msgstr "Profile"
+
+#~ msgid "Logout"
+#~ msgstr "Logout"
+
+#~ msgid "Login"
+#~ msgstr "Login"
+
+#~ msgid "Are you sure you want to delete"
+#~ msgstr "Are you sure you want to delete"
 
 #~ msgid "Not translated"
 #~ msgstr "English"

@@ -3,8 +3,10 @@ from django.db import models
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
 
 from account.models import Profile
+from . import validators
 
 
 class Printer(models.Model):
@@ -23,9 +25,18 @@ class Printer(models.Model):
     status = models.BooleanField(default=False, verbose_name=_("Available"))
     comment = models.TextField(null=True, blank=True, verbose_name=_("Comment"))
 
+    def __str__(self):
+        return self.name
+
 
 class File(models.Model):
-    file = models.FileField(upload_to="")
+    file = models.FileField(
+        validators=[
+            validators.FileSizeValidator(52428800),  # 50MB
+            # TODO: Combine with validate_image_file_extension
+            FileExtensionValidator(allowed_extensions=['doc', 'docx', 'odt', 'djvu', 'jpg', 'jpeg', 'pdf', 'png'])
+        ]
+    )
     owner = models.ForeignKey(
         Profile,
         related_name='owned_files',
@@ -33,9 +44,13 @@ class File(models.Model):
     )
     shared_with = models.ManyToManyField(
         Profile,
+        blank=True,
         related_name='shared_files'
     )
     uploaded = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.file.name
 
 
 # Deletes file from filesystem when File object is deleted.

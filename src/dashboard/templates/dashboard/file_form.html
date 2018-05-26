@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div>
+  <form class="uk-form-stacked" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for item in form %}
+    <div>
+      {% if item.errors %}
+      <p>{{ item.errors }}</p>
+      {% endif %}
+      <label class="uk-form-label">{{ item.label }}</label>
+      <div class="uk-form-controls">
+        {{ item }}
+      </div>
+    </div>
+    {% endfor %}
+    <input class="uk-button uk-button-primary" type="submit" value='{% trans "Confirm" %}'></input>
+  </form>
+</div>
+{% endblock %}
