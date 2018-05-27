@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import BooleanField
 
 from . import models
 from account.models import Profile
@@ -19,6 +20,8 @@ class NewPrinterForm(forms.ModelForm):
 
 
 class GetRoomForm(forms.ModelForm):
+    data_handling = BooleanField()
+
     def __init__(self, *args, **kwargs):
         super(GetRoomForm, self).__init__(*args, **kwargs)
         self.fields['room'].widget.attrs = {'class': base_classes + ' uk-input'}
