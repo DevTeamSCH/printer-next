@@ -4,7 +4,7 @@
 
 {% block content %}
 <p>{% trans "You need to provide your room number to add printers." %}</p>
-<form class="uk-form-stacked" action="" method="post">
+<form class="uk-form-horizontal" action="" method="post">
     {% csrf_token %}
     {% for field in form %}
         <div class="uk-margin">
