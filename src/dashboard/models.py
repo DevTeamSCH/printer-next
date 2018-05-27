@@ -35,17 +35,20 @@ class File(models.Model):
             validators.FileSizeValidator(52428800),  # 50MB
             # TODO: Combine with validate_image_file_extension
             FileExtensionValidator(allowed_extensions=['doc', 'docx', 'odt', 'djvu', 'jpg', 'jpeg', 'pdf', 'png'])
-        ]
+        ],
+        verbose_name=_("File")
     )
     owner = models.ForeignKey(
         Profile,
         related_name='owned_files',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name=_("Owner")
     )
     shared_with = models.ManyToManyField(
         Profile,
         blank=True,
-        related_name='shared_files'
+        related_name='shared_files',
+        verbose_name=_("Shared With")
     )
     uploaded = models.DateTimeField(auto_now_add=True)
 

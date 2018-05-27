@@ -6,18 +6,33 @@
 <div>
   <form class="uk-form-stacked" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {% for item in form %}
+
+    {% if form.file %}
     <div>
-      {% if item.errors %}
-      <p>{{ item.errors }}</p>
+      {% if form.shared_with.errors %}
+      <p>{{ form.shared_with.errors }}</p>
       {% endif %}
-      <label class="uk-form-label">{{ item.label }}</label>
+      <label class="uk-form-label">{{ form.file.label }}</label>
       <div class="uk-form-controls">
-        {{ item }}
+        <div uk-form-custom="target: true">
+          <input type="file" name="file">
+          <input class="uk-input uk-form-width-medium" type="text" placeholder="{% trans "Select file" %}" disabled>
+          <button class="uk-button uk-button-secondary uk-form-width-medium" type="button" tabindex="-1">{% trans "Select" %}</button>
+        </div>
       </div>
     </div>
-    {% endfor %}
-    <input class="uk-button uk-button-primary" type="submit" value='{% trans "Confirm" %}'></input>
+    {% endif %}
+
+    <div class="uk-margin">
+      {% if form.shared_with.errors %}
+      <p>{{ form.shared_with.errors }}</p>
+      {% endif %}
+      <label class="uk-form-label">{{ form.shared_with.label }}</label>
+      <div class="uk-form-controls">
+        {{ form.shared_with }}
+      </div>
+    </div>
+    <button class="uk-button uk-button-primary" type="submit">{% trans "Confirm" %}</button>
   </form>
 </div>
 {% endblock %}

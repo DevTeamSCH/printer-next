@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-26 22:51+0000\n"
-"PO-Revision-Date: 2018-05-26 23:14+0000\n"
+"POT-Creation-Date: 2018-05-27 20:05+0000\n"
+"PO-Revision-Date: 2018-05-27 20:12+0000\n"
 "Last-Translator: b'Barnabas Czeman <trabarni@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,31 +19,53 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: dashboard/models.py:13
+#: dashboard/models.py:14
 msgid "Black-White"
 msgstr "Fekete-fehér"
 
-#: dashboard/models.py:14
+#: dashboard/models.py:15
 msgid "Color"
 msgstr "Színes"
 
-#: dashboard/models.py:22 dashboard/templates/dashboard/profile.html:7
+#: dashboard/models.py:23 dashboard/templates/dashboard/profile.html:7
 msgid "Name"
 msgstr "Név"
 
-#: dashboard/models.py:23 dashboard/templates/dashboard/printer_list.html:17
+#: dashboard/models.py:24 dashboard/templates/dashboard/printer_list.html:17
 msgid "Type"
 msgstr "Típus"
 
-#: dashboard/models.py:24
+#: dashboard/models.py:25
 msgid "Available"
 msgstr "Elérhető"
 
-#: dashboard/models.py:25 dashboard/templates/dashboard/printer_list.html:18
+#: dashboard/models.py:26 dashboard/templates/dashboard/printer_list.html:18
 msgid "Comment"
 msgstr "Megjegyzés"
 
+#: dashboard/models.py:39
+#| msgid "Filename"
+msgid "File"
+msgstr "Fájlnév"
+
+#: dashboard/models.py:45 dashboard/templates/dashboard/files.html:40
+msgid "Owner"
+msgstr "Tulajdonos"
+
+#: dashboard/models.py:51
+#| msgid "Shared With Me"
+msgid "Shared With"
+msgstr "Megosztás"
+
+#: dashboard/templates/dashboard/file_form.html:19
+msgid "Select file"
+msgstr "Fájl keresése..."
+
 #: dashboard/templates/dashboard/file_form.html:20
+msgid "Select"
+msgstr "Tallózás"
+
+#: dashboard/templates/dashboard/file_form.html:35
 msgid "Confirm"
 msgstr "Mentés"
 
@@ -73,10 +95,6 @@ msgstr "Megosztás"
 #: dashboard/templates/dashboard/profile.html:31
 msgid "Delete"
 msgstr "Törlés"
-
-#: dashboard/templates/dashboard/files.html:40
-msgid "Owner"
-msgstr "Tulajdonos"
 
 #: dashboard/templates/dashboard/files.html:43
 msgid "Shared With Me"

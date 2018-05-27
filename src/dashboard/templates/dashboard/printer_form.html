@@ -6,13 +6,13 @@
 <form class="uk-form-stacked" action="" method="post">
     {% csrf_token %}
     {% for field in form %}
-        <div class="uk-margin">
-            <label class="uk-form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
-            <div class="uk-form-controls">
-                {{ field }}
-            </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+        <div class="uk-form-controls">
+          {{ field }}
         </div>
+      </div>
     {% endfor %}
-    <input class="uk-button uk-button-primary" type="submit" value="{% trans "Save" %}" />
+    <button class="uk-button uk-button-primary" type="submit">{% trans "Save" %}</button>
 </form>
 {% endblock %}
