@@ -164,5 +164,4 @@ REST_FRAMEWORK = {
 }
 
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT')
-
-MEDIA_URL = "/files/"
+MEDIA_URL = "/uploads/"

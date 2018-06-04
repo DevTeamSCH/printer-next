@@ -18,7 +18,7 @@
     <tbody>
       {% for file in uploaded_files %}
       <tr>
-        <td><a href="{{ file.file.url }}">{{ file.file.name }}</a></td>
+        <td><a download="{{ file.file.name }}" href="{{ file.file.url }}">{{ file.file.name }}</a></td>
         <td>{{ file.uploaded }}</td>
         <td>
           <a class="uk-button uk-button-primary" href="{% url "file-share" file.id %}" >
@@ -44,7 +44,7 @@
     <tbody>
       {% for file in shared_files %}
       <tr>
-        <td><a href="{{ file.file.url }}" >{{ file.file.name }}</a></td>
+        <td><a download="{{ file.file.name }}" href="{{ file.file.url }}" >{{ file.file.name }}</a></td>
         <td>{{ file.uploaded }}</td>
         <td>{{ file.owner }}</td>
       </tr>
