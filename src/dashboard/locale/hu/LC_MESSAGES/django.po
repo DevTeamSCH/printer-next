@@ -8,109 +8,156 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-02 21:43+0200\n"
-"PO-Revision-Date: 2017-03-28 21:58+0200\n"
-"Last-Translator: b'Ferenc Marki-Zay <ferencmarkizay@gmail.com>'\n"
+"POT-Creation-Date: 2018-05-27 20:05+0000\n"
+"PO-Revision-Date: 2018-05-27 20:12+0000\n"
+"Last-Translator: b'Barnabas Czeman <trabarni@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Translated-Using: django-rosetta 0.7.12\n"
+"X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: .\models.py:7 .\templates\profile.html:9
-msgid "Room number"
-msgstr "Szobaszám"
-
-#: .\models.py:27
+#: dashboard/models.py:14
 msgid "Black-White"
 msgstr "Fekete-fehér"
 
-#: .\models.py:28
+#: dashboard/models.py:15
 msgid "Color"
 msgstr "Színes"
 
-#: .\models.py:36 .\templates\profile.html:7
+#: dashboard/models.py:23 dashboard/templates/dashboard/profile.html:7
 msgid "Name"
 msgstr "Név"
 
-#: .\models.py:37 .\templates\printer_list.html:17
+#: dashboard/models.py:24 dashboard/templates/dashboard/printer_list.html:17
 msgid "Type"
 msgstr "Típus"
 
-#: .\models.py:38
+#: dashboard/models.py:25
 msgid "Available"
 msgstr "Elérhető"
 
-#: .\models.py:39 .\templates\printer_list.html:18
+#: dashboard/models.py:26 dashboard/templates/dashboard/printer_list.html:18
 msgid "Comment"
 msgstr "Megjegyzés"
 
-#: .\templates\base.html:27
-msgid "Printers"
-msgstr "Nyomtatók"
+#: dashboard/models.py:39
+#| msgid "Filename"
+msgid "File"
+msgstr "Fájlnév"
 
-#: .\templates\base.html:32
-msgid "New printer"
-msgstr "Új nyomtató"
+#: dashboard/models.py:45 dashboard/templates/dashboard/files.html:40
+msgid "Owner"
+msgstr "Tulajdonos"
 
-#: .\templates\base.html:37
-msgid "Client"
-msgstr "Kliens"
+#: dashboard/models.py:51
+#| msgid "Shared With Me"
+msgid "Shared With"
+msgstr "Megosztás"
 
-#: .\templates\base.html:42
-msgid "F.A.Q."
-msgstr "Gy.I.K."
+#: dashboard/templates/dashboard/file_form.html:19
+msgid "Select file"
+msgstr "Fájl keresése..."
 
-#: .\templates\base.html:53
-msgid "Profile"
-msgstr "Profil"
+#: dashboard/templates/dashboard/file_form.html:20
+msgid "Select"
+msgstr "Tallózás"
 
-#: .\templates\base.html:56
-msgid "Logout"
-msgstr "Kijelentkezés"
-
-#: .\templates\base.html:61
-msgid "Login"
-msgstr "Bejelentkezés"
-
-#: .\templates\get_room.html:6
-msgid "You need to provide your room number to add printers."
-msgstr "Meg kell adnod a szobaszámod mielőtt hozzáadhatsz nyomtatókat."
-
-#: .\templates\get_room.html:17 .\templates\printer_create.html:16
-#: .\templates\profile.html:35
-msgid "Save"
+#: dashboard/templates/dashboard/file_form.html:35
+msgid "Confirm"
 msgstr "Mentés"
 
-#: .\templates\printer_delete.html:7
-msgid "Are you sure you want to delete"
-msgstr "Biztosan ki akarod törölni a következő nyomtatót:"
+#: dashboard/templates/dashboard/files.html:8
+msgid "File Upload"
+msgstr "Fájl Feltöltés"
 
-#: .\templates\printer_delete.html:8
-msgid "Confirm"
-msgstr "Törlés"
+#: dashboard/templates/dashboard/files.html:13
+#: dashboard/templates/dashboard/files.html:38
+msgid "Filename"
+msgstr "Fájlnév"
 
-#: .\templates\profile.html:9
-msgid "Change"
-msgstr "Megváltoztatás"
+#: dashboard/templates/dashboard/files.html:14
+#: dashboard/templates/dashboard/files.html:39
+msgid "Time"
+msgstr "Idő"
 
-#: .\templates\profile.html:12
-msgid "Generate new token"
-msgstr "Új token generálása"
+#: dashboard/templates/dashboard/files.html:15
+msgid "Operations"
+msgstr "Műveletek"
 
-#: .\templates\profile.html:15
-msgid "My printers"
-msgstr "Nyomtatóim"
+#: dashboard/templates/dashboard/files.html:25
+msgid "Share"
+msgstr "Megosztás"
 
-#: .\templates\profile.html:32
+#: dashboard/templates/dashboard/files.html:28
+#: dashboard/templates/dashboard/profile.html:31
 msgid "Delete"
 msgstr "Törlés"
 
-#: .\views.py:51
+#: dashboard/templates/dashboard/files.html:43
+msgid "Shared With Me"
+msgstr "Velem Megosztva"
+
+#: dashboard/templates/dashboard/get_room.html:6
+msgid "You need to provide your room number to add printers."
+msgstr "Meg kell adnod a szobaszámod mielőtt hozzáadhatsz nyomtatókat."
+
+#: dashboard/templates/dashboard/get_room.html:17
+#: dashboard/templates/dashboard/printer_form.html:16
+#: dashboard/templates/dashboard/profile.html:34
+msgid "Save"
+msgstr "Mentés"
+
+#: dashboard/templates/dashboard/profile.html:9
+msgid "Room number"
+msgstr "Szobaszám"
+
+#: dashboard/templates/dashboard/profile.html:9
+msgid "Change"
+msgstr "Megváltoztatás"
+
+#: dashboard/templates/dashboard/profile.html:11
+msgid "Generate new token"
+msgstr "Új token generálása"
+
+#: dashboard/templates/dashboard/profile.html:14
+msgid "My printers"
+msgstr "Nyomtatóim"
+
+#: dashboard/validators.py:9
+#, python-format
+msgid "Too big file. %(size)d"
+msgstr "Túl nagy méretű fájl. %(size)d"
+
+#: dashboard/views.py:57
 msgid "N/A"
 msgstr "Nincs megadva"
+
+#~ msgid "Printers"
+#~ msgstr "Nyomtatók"
+
+#~ msgid "New printer"
+#~ msgstr "Új nyomtató"
+
+#~ msgid "Client"
+#~ msgstr "Kliens"
+
+#~ msgid "F.A.Q."
+#~ msgstr "Gy.I.K."
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Logout"
+#~ msgstr "Kijelentkezés"
+
+#~ msgid "Login"
+#~ msgstr "Bejelentkezés"
+
+#~ msgid "Are you sure you want to delete"
+#~ msgstr "Biztosan ki akarod törölni a következő nyomtatót:"
 
 #~ msgid "Not translated"
 #~ msgstr "Magyar"

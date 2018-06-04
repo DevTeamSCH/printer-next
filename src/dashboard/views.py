@@ -1,5 +1,6 @@
 from django.contrib.auth import logout, mixins
 from django.forms import inlineformset_factory
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import base, edit
@@ -116,7 +117,7 @@ def logout_view(request):
     return redirect("index")
 
 
-class DeletePrinterView(mixins.LoginRequiredMixin, edit.DeleteView):
+class PrinterDeleteView(mixins.LoginRequiredMixin, edit.DeleteView):
     model = models.Printer
     success_url = reverse_lazy("profile")
 
@@ -127,17 +128,32 @@ class PrinterListView(viewsets.ReadOnlyModelViewSet):
 
 
 class FileView(mixins.LoginRequiredMixin, base.TemplateView):
-    template_name = 'dashboard/file_upload.html'
+    template_name = 'dashboard/files.html'
 
     def get_context_data(self, **kwargs):
         context = super(FileView, self).get_context_data(**kwargs)
         context['form'] = forms.FileUploadForm()
-        context['Files'] = models.File.objects.filter(owner=self.request.user.profile)
+        context['uploaded_files'] = models.File.objects.filter(owner=self.request.user.profile)
+        context['shared_files'] = self.request.user.profile.shared_files.all()
         return context
 
-    def post(self, request):
-        form = forms.FileUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.instance.owner = self.request.user.profile
-            form.save()
-        return HttpResponseRedirect(reverse_lazy('file-upload'))
+
+class FileUploadView(mixins.LoginRequiredMixin, edit.CreateView):
+    model = models.File
+    form_class = forms.FileUploadForm
+    success_url = reverse_lazy('files')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user.profile
+        return super().form_valid(form)
+
+
+class FileDeleteView(mixins.LoginRequiredMixin, edit.DeleteView):
+    model = models.File
+    success_url = reverse_lazy("files")
+
+
+class SharedWithView(mixins.LoginRequiredMixin, edit.UpdateView):
+    model = models.File
+    form_class = forms.SharedWithForm
+    success_url = reverse_lazy('files')
