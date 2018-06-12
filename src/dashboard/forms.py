@@ -42,9 +42,12 @@ class GetRoomForm(forms.ModelForm):
 class FileUploadForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['shared_with'].widget.attrs = {
+        shared_with = self.fields['shared_with']
+        shared_with.widget.attrs = {
             'class': f"{base_classes} uk-select"
         }
+        choices =  [ (p.id, p.get_full_name()) for p in Profile.objects.all() if p.has_active_printers ]
+        shared_with.choices = choices
 
     class Meta:
         model = models.File
@@ -54,9 +57,12 @@ class FileUploadForm(forms.ModelForm):
 class SharedWithForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['shared_with'].widget.attrs = {
+        shared_with = self.fields['shared_with']
+        shared_with.widget.attrs = {
             'class': f"{base_classes} uk-select"
         }
+        choices = [ (p.id, p.get_full_name()) for p in Profile.objects.all() if p.has_active_printers ]
+        shared_with.choices = choices
 
     class Meta:
         model = models.File
