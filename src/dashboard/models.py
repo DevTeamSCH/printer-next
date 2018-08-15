@@ -75,3 +75,4 @@ def auto_delete_old_files(sender, instance, **kwargs):
     # TODO: Problem when not enough the free space and there are no uploaded files
     while free_space < instance.file.size:
         files[0].delete()
+        free_space = shutil.disk_usage(settings.MEDIA_ROOT).free
