@@ -9,3 +9,4 @@ class FileAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(models.Printer)
+admin.site.register(models.FaqEntry)

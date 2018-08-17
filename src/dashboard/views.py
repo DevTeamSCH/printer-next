@@ -3,7 +3,7 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import base, edit
+from django.views.generic import base, edit, list
 from django.utils.translation import gettext_lazy as _
 from django.http import HttpResponseRedirect
 from rest_framework import viewsets
@@ -29,8 +29,9 @@ class ClientView(base.TemplateView):
     template_name = "dashboard/client.html"
 
 
-class FAQView(base.TemplateView):
+class FAQView(list.ListView):
     template_name = "dashboard/faq.html"
+    model = models.FaqEntry
 
 
 class ProfileView(mixins.LoginRequiredMixin, base.TemplateView):
