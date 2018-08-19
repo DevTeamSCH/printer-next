@@ -2,5 +2,12 @@
 {% load staticfiles %}
 
 {% block content %}
-Még nincs
+<ul uk-accordion>
+  {% for faq_entry in object_list %}
+  <li>
+    <a class="uk-accordion-title" href="#">{{ faq_entry.title }}</a>
+    <div class="uk-accordion-content">{{ faq_entry.text }}</div>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}

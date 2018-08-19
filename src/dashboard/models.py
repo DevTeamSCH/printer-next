@@ -1,7 +1,9 @@
 import os
+import shutil
 from django.db import models
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 
@@ -56,9 +58,31 @@ class File(models.Model):
         return self.file.name
 
 
+class FaqEntry(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=255)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
 # Deletes file from filesystem when File object is deleted.
 @receiver(models.signals.post_delete, sender=File)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.file:
         if os.path.isfile(instance.file.path):
             os.remove(instance.file.path)
+
+
+@receiver(models.signals.pre_save, sender=File)
+def auto_delete_old_files(sender, instance, **kwargs):
+    """ This handler delete old files when need it. """
+    free_space = shutil.disk_usage(settings.MEDIA_ROOT).free
+    files = File.objects.all().order_by('uploaded')
+
+    # TODO: Problem when not enough the free space and there are no uploaded files
+    while free_space < instance.file.size:
+        files[0].delete()
+        free_space = shutil.disk_usage(settings.MEDIA_ROOT).free
