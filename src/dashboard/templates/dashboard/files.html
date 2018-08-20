@@ -4,10 +4,11 @@
 
 {% block content %}
 <div>
-    <a class="uk-button uk-button-primary" href="{% url "file-upload" %}">
-      <span uk-icon="icon:upload" class="uk-margin-small-right"></span> {% trans 'File Upload' %}
-    </a>
-    <table class="uk-table">
+  <a class="uk-button uk-button-primary" href="{% url "file-upload" %}">
+    <span uk-icon="icon:upload" class="uk-margin-small-right"></span> {% trans 'File Upload' %}
+  </a>
+
+  <table class="uk-table uk-visible@m">
     <thead>
       <tr>
         <th>{% trans "Filename" %}</th>
@@ -16,23 +17,44 @@
       </tr>
     </thead>
     <tbody>
-      {% for file in uploaded_files %}
-      <tr>
-        <td><a download="{{ file.file.name }}" href="{{ file.file.url }}">{{ file.file.name }}</a></td>
-        <td>{{ file.uploaded }}</td>
-        <td>
-          <a class="uk-button uk-button-primary" href="{% url "file-share" file.id %}" >
-            <span uk-icon="icon:social" class="uk-margin-small-right"></span> {% trans "Share" %}
-          </a>
-          <a class="uk-button uk-button-danger" href="{% url "file-delete" file.id %}" >
-            <span uk-icon="icon:trash" class="uk-margin-small-right"></span> {% trans "Delete" %}
-          </a>
-        </td>
-      </tr>
-      {% endfor %}
+    {% for file in uploaded_files %}
+    <tr>
+      <td><a download="{{ file.file.name }}" href="{{ file.file.url }}">{{ file.file.name }}</a></td>
+      <td>{{ file.uploaded }}</td>
+      <td>
+      <a class="uk-button uk-button-primary" href="{% url "file-share" file.id %}" >
+      <span uk-icon="icon:social" class="uk-margin-small-right"></span> {% trans "Share" %}
+      </a>
+      <a class="uk-button uk-button-danger" href="{% url "file-delete" file.id %}" >
+      <span uk-icon="icon:trash" class="uk-margin-small-right"></span> {% trans "Delete" %}
+      </a>
+      </td>
+    </tr>
+    {% endfor %}
     </tbody>
   </table>
-  <table class="uk-table">
+
+  <ul uk-accordion class="uk-hidden@m">
+    {% for file in uploaded_files %}
+    <li>
+      <a class="uk-accordion-title">{{ file.file.name }}</a>
+      <div class="uk-accordion-content">
+        <a class="uk-button uk-button-primary uk-button-small" download="{{ file.file.name }}" href="{{ file.file.url }}">
+          <span uk-icon="icon:download"></span>
+        </a>
+        <a class="uk-button uk-button-primary uk-button-small" href="{% url "file-share" file.id %}" >
+          <span uk-icon="icon:social"></span>
+        </a>
+        <a class="uk-button uk-button-danger uk-button-small" href="{% url "file-delete" file.id %}" >
+          <span uk-icon="icon:trash"></span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3>{% trans "Shared With Me" %}</h3>
+  <table class="uk-table uk-visible@m">
     <thead>
       <tr>
         <th> {% trans "Filename" %} </th>
@@ -40,7 +62,6 @@
         <th> {% trans "Owner" %} </th>
       </tr>
     </thead>
-    <h3>{% trans "Shared With Me" %}</h3>
     <tbody>
       {% for file in shared_files %}
       <tr>
@@ -51,5 +72,24 @@
       {% endfor %}
     </tbody>
   </table>
+
+  <ul class="uk-hidden@m" uk-accordion>
+    {% for file in shared_files %}
+    <li>
+      <a href=""class="uk-accordion-title">{{ file.file.name }}</a>
+      <div class="uk-accordion-content">
+        <dl class="uk-description-list">
+          <dt>{% trans "Filename" %}</dt>
+          <dd><a download="{{ file.file.name }}" href="{{ file.file.url }}" >{{ file.file.name }}</a></dd>
+          <dt>{% trans "Time" %}</dt>
+          <dd>{{ file.uploaded }}</dd>
+          <dt>{% trans "Owner" %}</dt>
+          <dd>{{ file.owner }}</dd>
+        </dl>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
 </div>
 {% endblock %}
