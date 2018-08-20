@@ -12,7 +12,6 @@ urlpatterns = [
     path('logout/', views.logout_view,  name='logout'),
     path('new-printer', views.NewPrinterView.as_view(), name="new-printer"),
     path('printer/<int:pk>/delete', views.PrinterDeleteView.as_view(), name="delete-printer"),
-    path('client', views.ClientView.as_view(), name='client'),
     path('FAQ', views.FAQView.as_view(), name='FAQ'),
     path('profile', views.ProfileView.as_view(), name='profile'),
     path('get-room', views.GetRoomView.as_view(), name='get-room'),

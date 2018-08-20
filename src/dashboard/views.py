@@ -25,10 +25,6 @@ class IndexView(base.TemplateView):
         return context
 
 
-class ClientView(base.TemplateView):
-    template_name = "dashboard/client.html"
-
-
 class FAQView(list.ListView):
     template_name = "dashboard/faq.html"
     model = models.FaqEntry
