@@ -1,0 +1,58 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<nav class="uk-navbar-container" uk-navbar>
+
+  <div class="uk-navbar-left">
+      <a class="uk-navbar-item uk-logo" href="{% url "index" %}">PrinterSCH</a>
+      <ul class="uk-navbar-nav">
+        <li>
+          <a href="{% url "index" %}">
+            <span uk-icon="icon:copy" class="uk-margin-small-right"></span> {% trans "Printers" %}
+          </a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li>
+          <a href="{% url "new-printer" %}">
+            <span uk-icon="icon:plus" class="uk-margin-small-right"></span> {% trans "New printer" %}
+          </a>
+        </li>
+        <li>
+          <a href="{% url "files" %}">
+            <span uk-icon="icon:folder" class="uk-margin-small-right"></span> {% trans "Files" %}
+          </a>
+        </li>
+        {% endif %}
+        <li>
+          <a href="https://github.com/DevTeamSCH/printer-client/releases">
+            <span uk-icon="icon:download" class="uk-margin-small-right"></span> {% trans "Client" %}
+          </a>
+        </li>
+        <li>
+          <a href="{% url "FAQ" %}">
+            <span uk-icon="icon:question" class="uk-margin-small-right"></span> {% trans "F.A.Q." %}
+          </a>
+        </li>
+      </ul>
+  </div>
+
+  <div class="uk-navbar-right">
+    <div class="uk-navbar-item">
+        {% if user.is_authenticated %}
+            <div class="uk-button-group">
+                <a class="uk-button uk-button-primary" href="{% url "profile" %}">
+                    <span uk-icon="icon:user"></span>{% trans "Profile" %}</a>
+
+                <a class="uk-button uk-button-danger" href="{% url "logout" %}">
+                    <span uk-icon="icon: sign-out"></span> {% trans "Logout" %}
+                </a>
+            </div>
+        {% else %}
+            <a class="uk-button uk-button-danger" href="{% url "social:begin" "authsch" %}">
+                <span uk-icon="icon: sign-in"></span> {% trans "Login" %}
+            </a>
+        {% endif %}
+    </div>
+  </div>
+
+</nav>
