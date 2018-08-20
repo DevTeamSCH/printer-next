@@ -1,0 +1,67 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<nav class="uk-navbar uk-navbar-container uk-margin">
+  <a class="uk-navbar-item uk-logo" href="{% url "index" %}">PrinterSCH</a>
+  <div class="uk-navbar-right">
+    <a class="uk-navbar-toggle" href="#offcanvas-menu" uk-toggle>
+      <span uk-navbar-toggle-icon></span>
+    </a>
+  </div>
+</nav>
+
+<div id="offcanvas-menu" uk-offcanvas>
+  <div class="uk-offcanvas-bar">
+
+  <ul class="uk-nav uk-nav-default">
+    <li>
+      <a href="{% url "index" %}">
+        <span uk-icon="icon:copy" class="uk-margin-small-right"></span> {% trans "Printers" %}
+      </a>
+    </li>
+    {% if request.user.is_authenticated %}
+    <li>
+      <a href="{% url "new-printer" %}">
+        <span uk-icon="icon:plus" class="uk-margin-small-right"></span> {% trans "New printer" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url "files" %}">
+        <span uk-icon="icon:folder" class="uk-margin-small-right"></span> {% trans "Files" %}
+      </a>
+    </li>
+    {% endif %}
+    <li>
+      <a href="https://github.com/DevTeamSCH/printer-client/releases">
+        <span uk-icon="icon:download" class="uk-margin-small-right"></span> {% trans "Client" %}
+      </a>
+    </li>
+    <li>
+      <a href="{% url "FAQ" %}">
+        <span uk-icon="icon:question" class="uk-margin-small-right"></span> {% trans "F.A.Q." %}
+      </a>
+    </li>
+    </li>
+    <li class="uk-nav-divider"></li>
+    {% if user.is_authenticated %}
+    <li>
+      <a href="{% url "profile" %}">
+        <span uk-icon="icon:user" class="uk-margin-small-right"></span>{% trans "Profile" %}</a>
+      </a>
+    </li>
+    <li>
+      <a href="{% url "logout" %}">
+        <span uk-icon="icon: sign-out" class="uk-margin-small-right"></span> {% trans "Logout" %}
+      </a>
+    </li>
+    {% else %}
+    <li>
+      <a href="{% url "social:begin" "authsch" %}">
+        <span uk-icon="icon: sign-in" class="uk-margin-small-right"></span> {% trans "Login" %}
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+
+  </div>
+</div>
