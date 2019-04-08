@@ -1,47 +1,29 @@
 # Printer-next
 
-## Követelmények
+## Requirements
 
-- python 3.5
-- pip
+- python 3.5+
+- pip, pipenv
 - npm
 
-## Fejlesztés
-```` pip -r requirements/development.txt ````
-> Érdemes virtualenv-et használni
+## Development
+1. Install dependencies from the pipfile
+
+2. Install node dependecies
 
 ```` npm install````
 
+3. Setup environmental variables
+
 ```` cp example.env .env````
 
-> Ki kell tölteni a környezeti változokat.
-
 ```` source .env ````
+
+4. Migrate and run server
 
 ```` python3 -Wall manage.py migrate ````
 
 ```` python3 -Wall manage.py runserver ````
 
 ## REST API
-Az api csak azonosítással használható. A profil oldalon generálható auth-tokent el kell küldeni minden kérés fejlécében, például:
-
-````Authorization: Token b89262e9d7a4c98fff9baed4c5fca2a660ae2a19````
-
-A felhasználó összes nyomtatója lekérhető a ``/api/my-printers/`` címen. A formátuma:
-
-````
-[
-    {
-        "id": 1,
-        "name": "nev1",
-        "status": false
-    },
-    {
-        "id": 2,
-        "name": "nev2",
-        "status": true
-    }
-]
-````
-
-A nyomtató státusza módosítható a ``/api/my-printers/<id>/`` címen. A címre küldött GET kérésre csak a megadott id-jű nyomtató adatait adja vissza. Az adatokat PUT és PATCH üzenetekkel lehet módosítani.
+TODO
