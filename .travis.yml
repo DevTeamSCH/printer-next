@@ -5,6 +5,9 @@ language: python
 python:
   - "3.6"
 
+env:
+  - SECRET_KEY=secretkey
+
 install:
   - pip install pipenv
   - pipenv sync --dev
