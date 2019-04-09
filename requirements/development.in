@@ -1,5 +1,0 @@
--r base.in
-
-django-rosetta==0.8.1
-pip-tools==1.8.0
-flake8==3.2.1
