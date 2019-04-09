@@ -1,19 +1,17 @@
 from django.contrib.auth import logout, mixins
 from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import base, edit, list
 from django.utils.translation import gettext_lazy as _
-from django.http import HttpResponseRedirect
-from rest_framework import viewsets
+from django.views.generic import base, edit, list
 from rest_framework import permissions
+from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 
-from . import models
-from . import forms
-from . import serializers
 from account.models import Profile
+from . import forms
+from . import models
+from . import serializers
 
 
 class IndexView(base.TemplateView):
